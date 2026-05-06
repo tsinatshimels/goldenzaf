@@ -4,7 +4,6 @@ export const siteSettingsSchema = defineType({
   name: 'siteSettings',
   title: 'Site Settings / የጣቢያ ቅንብሮች',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({
       name: 'companyName',

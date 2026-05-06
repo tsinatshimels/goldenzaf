@@ -8,6 +8,7 @@ export function Footer() {
   const t = useTranslations('footer')
   const tNav = useTranslations('nav')
   const tCategories = useTranslations('categories')
+  const tContact = useTranslations('contact')
   const locale = useLocale()
   const isAmharic = locale === 'am'
 
@@ -136,7 +137,7 @@ export function Footer() {
               'font-display text-lg text-gold-500 mb-5 font-semibold',
               isAmharic && 'font-amharic'
             )}>
-              {useTranslations('contact')('contact')}
+              {tContact('title')}
             </h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-sm text-[var(--cream)]/60">

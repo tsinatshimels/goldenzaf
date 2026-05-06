@@ -1,0 +1,48 @@
+
+> goldenzaf-furniture@1.0.0 build
+> next build
+
+  ▲ Next.js 14.2.5
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/14) ...
+   Generating static pages (3/14) 
+   Generating static pages (6/14) 
+   Generating static pages (10/14) 
+ ✓ Generating static pages (14/14)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    148 B          87.9 kB
+├ ○ /_not-found                          879 B          88.7 kB
+├ ● /[locale]                            11.8 kB         209 kB
+├   ├ /am
+├   └ /en
+├ ● /[locale]/about                      4.54 kB         194 kB
+├   ├ /am/about
+├   └ /en/about
+├ ● /[locale]/contact                    4.74 kB         159 kB
+├   ├ /am/contact
+├   └ /en/contact
+├ ● /[locale]/projects                   5.19 kB         202 kB
+├   ├ /am/projects
+├   └ /en/projects
+├ ● /[locale]/projects/[slug]            4.01 kB         201 kB
+├ ○ /robots.txt                          0 B                0 B
+├ ○ /sitemap.xml                         0 B                0 B
+└ ƒ /studio/[[...tool]]                  1.49 MB        1.61 MB
++ First Load JS shared by all            87.8 kB
+  ├ chunks/7023-d321b55f5470f8e1.js      31.7 kB
+  ├ chunks/fd9d1056-a6de23128e955fb1.js  53.6 kB
+  └ other shared chunks (total)          2.45 kB
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses getStaticProps)
+ƒ  (Dynamic)  server-rendered on demand
+

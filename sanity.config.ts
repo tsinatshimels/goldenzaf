@@ -4,6 +4,9 @@ import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './sanity/schemas'
 import { imageCompressionPlugin } from './sanity/plugins/imageCompression'
 
+const singletonTypes = new Set(['siteSettings'])
+const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
+
 export default defineConfig({
   name: 'goldenzaf',
   title: 'Golden Zaf Furniture — ወርቃማ ዛፍ CMS',
@@ -60,7 +63,17 @@ export default defineConfig({
     visionTool({ defaultApiVersion: '2024-01-01' }),
     imageCompressionPlugin(),
   ],
-  schema: { types: schemaTypes },
+  schema: {
+    types: schemaTypes,
+    templates: (templates) =>
+      templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
+  },
+  document: {
+    actions: (prev, context) =>
+      singletonTypes.has(context.schemaType)
+        ? prev.filter(({ action }) => action && singletonActions.has(action))
+        : prev,
+  },
 })
 
 function makeCategoryItem(S: any, category: string, title: string) {
