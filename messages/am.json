@@ -1,6 +1,7 @@
 {
   "nav": {
     "home": "መነሻ",
+    "categories": "ምድቦች",
     "projects": "ፕሮጀክቶች",
     "about": "ስለ እኛ",
     "contact": "ያግኙን",
@@ -8,15 +9,24 @@
   },
   "hero": {
     "tagline": "ውበት • ጥራት • ዘላቂነት",
-    "title": "ወርቃማ የቤት ዕቃ",
-    "subtitle": "ለቤትዎ ምርጥ የቤት ዕቃ እና የውስጥ ዲዛይን",
+    "title_lead": "ጥበብ ያላቸው",
+    "title_brand": "Golden Zaf",
+    "title_trail": "Furniture and Interior",
+    "title": "Golden Zaf Furniture and Interior",
+    "subtitle": "ብጁ የቤት ዕቃዎች እና ምርጥ የውስጥ ዲዛይን — በምርጥ ቁሳቁሶች በእጅ የተሰራ።",
     "cta_primary": "ስራዎቻችንን ይመልከቱ",
     "cta_secondary": "ያግኙን",
     "scroll": "ወደ ታች ሸብልሉ"
   },
   "categories": {
-    "title": "የምርት ምድቦች",
-    "subtitle": "ለቤትዎ፣ ለቢሮዎ እና ለሌሎች ቦታዎች ምርጥ የቤት ዕቃ",
+    "eyebrow": "የምናቀርባቸው",
+    "title": "ምድቦቻችን",
+    "subtitle": "ከሳሎን ዕቃዎች እስከ CNC ስራ — የምንሰራቸውን ሁሉ ይመልከቱ።",
+    "view_all": "ሁሉንም ምድቦች ይመልከቱ",
+    "view_subcategory": "ንዑስ ምድብ ይመልከቱ",
+    "item_count": "{count} ምርቶች",
+    "subcategory_count": "{count} ንዑስ ምድቦች",
+    "no_items": "በቅርቡ ምርቶች ይታከላሉ።",
     "living_room": "የሳሎን ዕቃዎች",
     "bedroom": "የመኝታ ዕቃዎች",
     "office": "የቢሮ ዕቃዎች",
@@ -39,10 +49,11 @@
     "back": "ወደ ኋላ"
   },
   "about": {
+    "eyebrow": "ስለ Golden Zaf",
     "title": "ስለ እኛ",
-    "subtitle": "Golden Zaf Furniture - ለዓመታት ምርጥ የቤት ዕቃ እናቀርባለን",
+    "subtitle": "Golden Zaf Furniture and Interior — ለዓመታት ምርጥ የቤት ዕቃ እናቀርባለን።",
     "story_title": "ታሪካችን",
-    "story": "Golden Zaf Furniture ለቤት ዕቃ እና የውስጥ ዲዛይን ዘርፍ ያደረ ኩባንያ ነው። ለዓመታት ምርጥ ጥራት ያለው የቤት ዕቃ ለደንበኞቻችን ስናቀርብ ቆይተናል። ለእያንዳንዱ ደንበኛ ልዩ እና ምርጥ ልምድ መስጠት ግባችን ነው።",
+    "story": "Golden Zaf Furniture and Interior ለቤት ዕቃ እና የውስጥ ዲዛይን ዘርፍ ያደረ ኩባንያ ነው። ለዓመታት ምርጥ ጥራት ያለው የቤት ዕቃ ለደንበኞቻችን ስናቀርብ ቆይተናል።",
     "mission_title": "ተልዕኮአችን",
     "mission": "ምርጥ ጥራት ያለው የቤት ዕቃ በተደራሽ ዋጋ ማቅረብ፣ ደንበኞቻችን ቤታቸውን ህልም ቦታ እንዲያደርጉ መርዳት።",
     "values_title": "ዋጋዎቻችን",

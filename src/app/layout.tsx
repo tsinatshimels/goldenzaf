@@ -20,19 +20,39 @@ const notoSerifEthiopic = Noto_Serif_Ethiopic({
   variable: '--font-noto-serif-ethiopic',
 })
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://goldenzaf.com'
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Golden Zaf Furniture & Interior',
-    template: '%s | Golden Zaf Furniture',
+    default: 'Golden Zaf Furniture and Interior',
+    template: '%s | Golden Zaf Furniture and Interior',
   },
-  description: 'Premium furniture and interior design solutions — ምርጥ የቤት ዕቃ እና የውስጥ ዲዛይን',
-  keywords: ['furniture', 'interior design', 'Ethiopia', 'Addis Ababa', 'Golden Zaf'],
+  description:
+    'Golden Zaf Furniture and Interior — premium furniture and interior design solutions for living rooms, bedrooms, offices, dining rooms, doors, and CNC craftwork.',
+  keywords: [
+    'Golden Zaf Furniture',
+    'Golden Zaf Interior',
+    'furniture',
+    'interior design',
+    'CNC',
+    'doors',
+    'office furniture',
+    'living room furniture',
+    'Ethiopia',
+    'Addis Ababa',
+  ],
   openGraph: {
-    title: 'Golden Zaf Furniture & Interior',
+    title: 'Golden Zaf Furniture and Interior',
     description: 'Premium furniture and interior design solutions',
-    url: 'https://goldenzaf.com',
-    siteName: 'Golden Zaf Furniture',
+    url: SITE_URL,
+    siteName: 'Golden Zaf Furniture and Interior',
     type: 'website',
+    images: ['/images/logo.png'],
+  },
+  icons: {
+    icon: '/images/logo.png',
+    apple: '/images/logo.png',
   },
 }
 

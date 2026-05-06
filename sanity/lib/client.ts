@@ -18,16 +18,28 @@ export function urlFor(source: SanityImageSource) {
 // ─── Queries ──────────────────────────────────────────────────────────────────
 
 export const projectsQuery = `*[_type == "project"] | order(createdAt desc) {
-  _id, title, titleAm, slug, category, description, descriptionAm,
+  _id, title, titleAm, slug, category, subcategory,
+  description, descriptionAm,
   coverImage, featured, createdAt, tags
 }`
 
 export const featuredProjectsQuery = `*[_type == "project" && featured == true] | order(createdAt desc)[0..5] {
-  _id, title, titleAm, slug, category, coverImage, description, descriptionAm, tags
+  _id, title, titleAm, slug, category, subcategory,
+  coverImage, description, descriptionAm, tags
+}`
+
+export const projectsByCategoryQuery = `*[_type == "project" && category == $category] | order(createdAt desc) {
+  _id, title, titleAm, slug, category, subcategory,
+  coverImage, description, descriptionAm
+}`
+
+export const projectsBySubcategoryQuery = `*[_type == "project" && subcategory == $subcategory] | order(createdAt desc) {
+  _id, title, titleAm, slug, category, subcategory,
+  coverImage, description, descriptionAm
 }`
 
 export const projectBySlugQuery = `*[_type == "project" && slug.current == $slug][0] {
-  _id, title, titleAm, slug, category, description, descriptionAm,
+  _id, title, titleAm, slug, category, subcategory, description, descriptionAm,
   images[]{ ..., asset-> }, coverImage, videoUrl, model3dUrl, createdAt, tags
 }`
 
@@ -46,6 +58,12 @@ export async function getProjects() {
 }
 export async function getFeaturedProjects() {
   return client.fetch(featuredProjectsQuery)
+}
+export async function getProjectsByCategory(category: string) {
+  return client.fetch(projectsByCategoryQuery, { category })
+}
+export async function getProjectsBySubcategory(subcategory: string) {
+  return client.fetch(projectsBySubcategoryQuery, { subcategory })
 }
 export async function getProjectBySlug(slug: string) {
   return client.fetch(projectBySlugQuery, { slug })

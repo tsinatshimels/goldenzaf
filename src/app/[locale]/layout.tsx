@@ -21,17 +21,19 @@ export async function generateMetadata({
   params: { locale: string }
 }): Promise<Metadata> {
   const isAmharic = locale === 'am'
+  // Brand name "Golden Zaf Furniture and Interior" is intentionally NOT translated.
   return {
     title: {
-      default: isAmharic
-        ? 'ወርቃማ ዛፍ — የቤት ዕቃ እና የውስጥ ዲዛይን'
-        : 'Golden Zaf Furniture & Interior',
-      template: isAmharic ? '%s | ወርቃማ ዛፍ' : '%s | Golden Zaf Furniture',
+      default: 'Golden Zaf Furniture and Interior',
+      template: '%s | Golden Zaf Furniture and Interior',
     },
     description: isAmharic
-      ? 'ምርጥ የቤት ዕቃ እና የውስጥ ዲዛይን — Golden Zaf Furniture'
-      : 'Premium furniture and interior design solutions — Golden Zaf Furniture',
-    alternates: { languages: { am: '/am', en: '/en' } },
+      ? 'Golden Zaf Furniture and Interior — ምርጥ የቤት ዕቃ እና የውስጥ ዲዛይን'
+      : 'Golden Zaf Furniture and Interior — premium furniture and interior design.',
+    alternates: {
+      canonical: `/${locale}`,
+      languages: { am: '/am', en: '/en' },
+    },
   }
 }
 
@@ -73,7 +75,7 @@ export default async function LocaleLayout({
               borderRadius: '0',
             },
             success: {
-              iconTheme: { primary: '#C9A84C', secondary: '#0f1c17' },
+              iconTheme: { primary: '#C9A14A', secondary: '#0D2820' },
             },
           }}
         />

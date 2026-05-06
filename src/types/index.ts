@@ -20,6 +20,7 @@ export interface Project {
   titleAm?: string
   slug: { current: string }
   category: ProjectCategory
+  subcategory?: string
   description?: string
   descriptionAm?: string
   images?: SanityImage[]

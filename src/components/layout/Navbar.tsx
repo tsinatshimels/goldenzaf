@@ -57,10 +57,10 @@ export function Navbar({ locale }: NavbarProps) {
       )}
     >
       <div className="container-site">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-24 lg:h-28">
           {/* Logo */}
-          <Link href={`/${locale}`} className="flex items-center gap-3 group">
-            <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-[var(--gold)] shadow-gold transition-all duration-300 group-hover:shadow-gold-lg">
+          <Link href={`/${locale}`} className="flex items-center gap-4 group">
+            <div className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full overflow-hidden border-2 border-[var(--gold)] shadow-gold transition-all duration-300 group-hover:shadow-gold-lg">
               <Image
                 src="/images/logo.png"
                 alt="Golden Zaf Logo"
@@ -71,17 +71,17 @@ export function Navbar({ locale }: NavbarProps) {
                   e.currentTarget.style.display = 'none'
                 }}
               />
-              <div className="absolute inset-0 flex items-center justify-center text-gold-500 font-display font-bold text-lg">
+              <div className="absolute inset-0 flex items-center justify-center text-gold-500 font-display font-bold text-xl lg:text-2xl">
                 GZ
               </div>
             </div>
             <div className="hidden sm:block">
-              <p className="font-display font-semibold text-lg leading-none text-gold-gradient">
+              <p className="font-display font-semibold text-xl lg:text-2xl leading-none text-gold-gradient">
                 Golden Zaf
               </p>
               <p className={cn(
-                'text-xs tracking-widest uppercase text-[var(--text-muted)]',
-                isAmharic && 'font-amharic text-[10px] tracking-normal'
+                'text-sm lg:text-base tracking-[0.28em] uppercase text-[var(--text-muted)]',
+                isAmharic && 'font-amharic text-sm lg:text-lg tracking-normal'
               )}>
                 {isAmharic ? 'ወርቃማ ዛፍ' : 'Furniture & Interior'}
               </p>
@@ -97,8 +97,8 @@ export function Navbar({ locale }: NavbarProps) {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    'relative font-body text-sm tracking-wide transition-colors duration-200',
-                    isAmharic && 'font-amharic text-base',
+                    'relative font-body text-base lg:text-lg tracking-wide transition-colors duration-200',
+                    isAmharic && 'font-amharic text-lg',
                     isActive
                       ? 'text-gold-500'
                       : 'text-[var(--text-secondary)] hover:text-gold-500',
@@ -119,7 +119,7 @@ export function Navbar({ locale }: NavbarProps) {
             <div className="relative">
               <button
                 onClick={() => setLangOpen(!langOpen)}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-sm border border-[var(--border)] text-[var(--text-secondary)] hover:text-gold-500 hover:border-gold-500 transition-all duration-200 text-sm"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-sm border border-[var(--border)] text-[var(--text-secondary)] hover:text-gold-500 hover:border-gold-500 transition-all duration-200 text-sm lg:text-base"
               >
                 <Globe className="w-4 h-4" />
                 <span className="font-semibold uppercase">{locale}</span>
