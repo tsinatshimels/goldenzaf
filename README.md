@@ -31,7 +31,7 @@ npm install
 ---
 
 ### Step 3: Get Sanity API Token
-
+ 
 1. In your Sanity project, go to **Settings → API → Tokens**
 2. Click **"Add API Token"**
 3. Name it: `website-write`
