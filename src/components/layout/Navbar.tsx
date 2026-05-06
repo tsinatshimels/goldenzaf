@@ -6,8 +6,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
 import { Menu, X, Sun, Moon, Globe, ChevronDown } from 'lucide-react'
-import type { Locale } from '@/i18n/request'
-import { locales } from '@/i18n/request'
+import { locales, type Locale } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
 
 interface NavbarProps {
