@@ -24,9 +24,10 @@ export function ProjectDetailClient({ project }: { project: Project }) {
   const title = isAmharic ? (project.titleAm || project.title) : project.title
   const description = isAmharic ? (project.descriptionAm || project.description) : project.description
   const catLabel = isAmharic ? categoryLabels[projectCategory].am : categoryLabels[projectCategory].en
+  const projectImages = project.images ?? []
 
-  const galleryImages = project.images?.length > 0
-    ? project.images.map((img: any) => urlFor(img).width(1200).url())
+  const galleryImages = projectImages.length > 0
+    ? projectImages.map((img: any) => urlFor(img).width(1200).url())
     : categoryImages[projectCategory]
 
   const coverImageUrl = project.coverImage
