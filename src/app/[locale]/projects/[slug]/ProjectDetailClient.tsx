@@ -5,25 +5,29 @@ import Link from 'next/link'
 import { useTranslations, useLocale } from 'next-intl'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Images, Play, Box, X, ChevronLeft, ChevronRight } from 'lucide-react'
-import { cn, categoryLabels, categoryImages } from '@/lib/utils'
+import { cn, categoryLabels, categoryImages, CATEGORY_KEYS, type CategoryKey } from '@/lib/utils'
 import { urlFor } from '@/sanity/lib/client'
+import type { Project } from '@/types'
 
 type Tab = 'gallery' | 'video' | '3d'
 
-export function ProjectDetailClient({ project }: { project: any }) {
+export function ProjectDetailClient({ project }: { project: Project }) {
   const t = useTranslations('projects')
   const locale = useLocale()
   const isAmharic = locale === 'am'
   const [activeTab, setActiveTab] = useState<Tab>('gallery')
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const projectCategory: CategoryKey = CATEGORY_KEYS.includes(project.category as CategoryKey)
+    ? (project.category as CategoryKey)
+    : 'living_room'
 
   const title = isAmharic ? (project.titleAm || project.title) : project.title
   const description = isAmharic ? (project.descriptionAm || project.description) : project.description
-  const catLabel = isAmharic ? categoryLabels[project.category]?.am : categoryLabels[project.category]?.en
+  const catLabel = isAmharic ? categoryLabels[projectCategory].am : categoryLabels[projectCategory].en
 
   const galleryImages = project.images?.length > 0
     ? project.images.map((img: any) => urlFor(img).width(1200).url())
-    : categoryImages[project.category] || categoryImages.living_room
+    : categoryImages[projectCategory]
 
   const coverImageUrl = project.coverImage
     ? urlFor(project.coverImage).width(1200).url()
