@@ -1,0 +1,111 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "about": "About Us",
+    "contact": "Contact",
+    "language": "Language"
+  },
+  "hero": {
+    "tagline": "Beauty • Quality • Durability",
+    "title": "Golden Zaf Furniture",
+    "subtitle": "Premium furniture and interior design solutions for your home and office",
+    "cta_primary": "View Our Work",
+    "cta_secondary": "Get In Touch",
+    "scroll": "Scroll Down"
+  },
+  "categories": {
+    "title": "Product Categories",
+    "subtitle": "Premium furniture for your home, office, and beyond",
+    "living_room": "Living Room Furniture",
+    "bedroom": "Bedroom Furniture",
+    "office": "Office Furniture",
+    "dining_kitchen": "Dining Room & Kitchen",
+    "cnc": "CNC Products",
+    "doors": "Doors",
+    "interior": "Interior Design",
+    "other": "Other Products"
+  },
+  "projects": {
+    "title": "Our Projects",
+    "subtitle": "A showcase of our finest completed works",
+    "view_all": "View All Projects",
+    "view_project": "View Project",
+    "gallery": "Gallery",
+    "video": "Video",
+    "model_3d": "3D Model",
+    "no_projects": "No projects found",
+    "filter_all": "All",
+    "back": "Back"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Golden Zaf Furniture — Delivering excellence for years",
+    "story_title": "Our Story",
+    "story": "Golden Zaf Furniture is a dedicated company in the furniture and interior design sector. For years, we have been delivering premium quality furniture to our clients. Our goal is to provide each customer with a unique and exceptional experience.",
+    "mission_title": "Our Mission",
+    "mission": "To offer premium quality furniture at accessible prices, helping our clients turn their homes into dream spaces.",
+    "values_title": "Our Values",
+    "quality": "Quality",
+    "quality_desc": "We use only the finest raw materials",
+    "craftsmanship": "Craftsmanship",
+    "craftsmanship_desc": "Experienced furniture artisans",
+    "innovation": "Innovation",
+    "innovation_desc": "Modern design and technology",
+    "service": "Service",
+    "service_desc": "Client-centered approach",
+    "team_title": "Our Team",
+    "stats_projects": "Projects Completed",
+    "stats_clients": "Happy Clients",
+    "stats_years": "Years of Experience",
+    "stats_team": "Team Members"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "For any inquiries or orders, please get in touch",
+    "name": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "message": "Message",
+    "subject": "Subject",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Your message has been sent! We will get back to you soon.",
+    "error": "An error occurred. Please try again.",
+    "location_title": "Our Location",
+    "location": "Addis Ababa, Ethiopia",
+    "phone_label": "Phone",
+    "email_label": "Email",
+    "hours_title": "Working Hours",
+    "hours": "Monday - Saturday: 8:00 AM - 6:00 PM"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to your most common questions",
+    "q1": "What types of furniture do you make?",
+    "a1": "We offer living room, bedroom, office, dining room and kitchen furniture, along with CNC products and doors.",
+    "q2": "How long does an order take?",
+    "a2": "This varies based on product type and quantity. Contact us for detailed information.",
+    "q3": "Do you deliver to my location?",
+    "a3": "Yes, we have delivery service to Addis Ababa and surrounding areas.",
+    "q4": "Do you do custom designs?",
+    "a4": "Yes! We create custom designs based on each client's requirements.",
+    "q5": "Do your products come with a warranty?",
+    "a5": "Yes, all our products come with a warranty. Contact us for more details."
+  },
+  "footer": {
+    "tagline": "Premium Furniture for Premium Homes",
+    "quick_links": "Quick Links",
+    "categories": "Categories",
+    "follow": "Follow Us",
+    "rights": "All rights reserved",
+    "made_with": "Made with love"
+  },
+  "theme": {
+    "dark": "Dark",
+    "light": "Light"
+  },
+  "loading": "Loading...",
+  "error_404": "Page Not Found",
+  "back_home": "Back to Home"
+}
