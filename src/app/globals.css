@@ -7,12 +7,13 @@
 
 /* ─── CSS Variables ──────────────────────────────────────────────────────── */
 :root {
-  --gold: #C9A84C;
-  --gold-light: #F5D483;
-  --gold-dark: #92740A;
-  --forest: #1E3A2F;
-  --forest-dark: #0f1c17;
-  --forest-light: #2d5440;
+  /* Brand colors are tuned to match the Golden Zaf logo. */
+  --gold: #C9A14A;
+  --gold-light: #F2D27D;
+  --gold-dark: #8B6E1B;
+  --forest: #143228;
+  --forest-dark: #0D2820;
+  --forest-light: #1E3A2F;
   --cream: #FAF7F0;
   --white: #ffffff;
   --black: #0a0a0a;
@@ -24,20 +25,20 @@
   --text-primary: #1a1a1a;
   --text-secondary: #4a4a4a;
   --text-muted: #888888;
-  --border: rgba(201, 168, 76, 0.2);
-  --border-strong: rgba(201, 168, 76, 0.4);
+  --border: rgba(201, 161, 74, 0.2);
+  --border-strong: rgba(201, 161, 74, 0.4);
   --shadow: rgba(0, 0, 0, 0.08);
 }
 
 .dark {
-  --bg-primary: #0f1c17;
-  --bg-secondary: #1E3A2F;
-  --bg-card: #162620;
+  --bg-primary: #0D2820;
+  --bg-secondary: #143228;
+  --bg-card: #102B22;
   --text-primary: #FAF7F0;
   --text-secondary: #c8c4bc;
   --text-muted: #8a9e94;
-  --border: rgba(201, 168, 76, 0.15);
-  --border-strong: rgba(201, 168, 76, 0.3);
+  --border: rgba(201, 161, 74, 0.15);
+  --border-strong: rgba(201, 161, 74, 0.3);
   --shadow: rgba(0, 0, 0, 0.4);
 }
 
@@ -73,7 +74,7 @@ body {
 }
 
 .text-gold-gradient {
-  background: linear-gradient(135deg, #C9A84C 0%, #F5D483 50%, #C9A84C 100%);
+  background: linear-gradient(135deg, #C9A14A 0%, #F2D27D 50%, #C9A14A 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -92,16 +93,24 @@ body {
 
 /* ─── Selection ──────────────────────────────────────────────────────────── */
 ::selection {
-  background: rgba(201, 168, 76, 0.3);
+  background: rgba(201, 161, 74, 0.3);
   color: var(--text-primary);
+}
+
+/* Subtle vignette over hero and section dividers — ties the deep green together. */
+.dark body {
+  background-image:
+    radial-gradient(circle at 50% 0%, rgba(201, 161, 74, 0.05), transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(13, 40, 32, 0.6), transparent 70%);
+  background-attachment: fixed;
 }
 
 /* ─── Gold Button ────────────────────────────────────────────────────────── */
 .btn-gold {
   @apply relative inline-flex items-center gap-2 px-8 py-3 font-body font-semibold text-sm tracking-widest uppercase overflow-hidden;
-  background: linear-gradient(135deg, #C9A84C, #F5D483, #C9A84C);
+  background: linear-gradient(135deg, #C9A14A, #F2D27D, #C9A14A);
   background-size: 200% auto;
-  color: #0f1c17;
+  color: #0D2820;
   border: none;
   transition: background-position 0.5s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
@@ -109,7 +118,7 @@ body {
 .btn-gold:hover {
   background-position: right center;
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(201, 168, 76, 0.5);
+  box-shadow: 0 8px 30px rgba(201, 161, 74, 0.5);
 }
 
 .btn-outline {
@@ -121,8 +130,8 @@ body {
 }
 
 .btn-outline:hover {
-  background: rgba(201, 168, 76, 0.1);
-  box-shadow: 0 0 20px rgba(201, 168, 76, 0.2);
+  background: rgba(201, 161, 74, 0.1);
+  box-shadow: 0 0 20px rgba(201, 161, 74, 0.2);
   transform: translateY(-2px);
 }
 
@@ -136,7 +145,7 @@ body {
 
 .card-glass:hover {
   border-color: var(--border-strong);
-  box-shadow: 0 20px 60px rgba(201, 168, 76, 0.15);
+  box-shadow: 0 20px 60px rgba(201, 161, 74, 0.15);
   transform: translateY(-4px);
 }
 
@@ -150,7 +159,7 @@ body {
 /* ─── Gold Divider ───────────────────────────────────────────────────────── */
 .gold-divider {
   height: 2px;
-  background: linear-gradient(90deg, transparent, #C9A84C, transparent);
+  background: linear-gradient(90deg, transparent, #C9A14A, transparent);
   border: none;
 }
 
@@ -234,7 +243,7 @@ body {
   background: linear-gradient(
     90deg,
     var(--bg-card) 25%,
-    rgba(201, 168, 76, 0.08) 50%,
+    rgba(201, 161, 74, 0.08) 50%,
     var(--bg-card) 75%
   );
   background-size: 200% 100%;

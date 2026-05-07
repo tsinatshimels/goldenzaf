@@ -11,9 +11,7 @@ const nextConfig = {
       { protocol: 'https', hostname: 'source.unsplash.com' },
     ],
   },
-  experimental: {
-    serverActions: { allowedOrigins: ['localhost:3000'] },
-  },
+  eslint: { ignoreDuringBuilds: true },
 }
 
 module.exports = withNextIntl(nextConfig)

@@ -5,7 +5,14 @@ import Link from 'next/link'
 import { useTranslations, useLocale } from 'next-intl'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Images, Play, Box, X, ChevronLeft, ChevronRight } from 'lucide-react'
-import { cn, categoryLabels, categoryImages, CATEGORY_KEYS, type CategoryKey } from '@/lib/utils'
+import {
+  cn,
+  categoryLabels,
+  categoryImages,
+  subcategoryLabels,
+  CATEGORY_KEYS,
+  type CategoryKey,
+} from '@/lib/utils'
 import { urlFor } from '@/sanity/lib/client'
 import type { Project } from '@/types'
 
@@ -24,6 +31,12 @@ export function ProjectDetailClient({ project }: { project: Project }) {
   const title = isAmharic ? (project.titleAm || project.title) : project.title
   const description = isAmharic ? (project.descriptionAm || project.description) : project.description
   const catLabel = isAmharic ? categoryLabels[projectCategory].am : categoryLabels[projectCategory].en
+  const subKey = (project as any).subcategory as string | undefined
+  const subLabel = subKey
+    ? isAmharic
+      ? subcategoryLabels[subKey]?.am
+      : subcategoryLabels[subKey]?.en
+    : undefined
   const projectImages = project.images ?? []
 
   const galleryImages = projectImages.length > 0
@@ -154,13 +167,28 @@ export function ProjectDetailClient({ project }: { project: Project }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              {/* Category */}
-              <span className={cn(
-                'inline-block text-[10px] px-3 py-1 bg-gold-500 text-forest-900 font-bold tracking-widest uppercase mb-4',
-                isAmharic && 'font-amharic text-xs tracking-normal'
-              )}>
-                {catLabel}
-              </span>
+              {/* Category + Subcategory */}
+              <div className="flex flex-wrap gap-2 mb-4">
+                <Link
+                  href={`/${locale}/categories/${projectCategory}`}
+                  className={cn(
+                    'inline-block text-[10px] px-3 py-1 bg-gold-500 text-forest-900 font-bold tracking-widest uppercase hover:opacity-90 transition-opacity',
+                    isAmharic && 'font-amharic text-xs tracking-normal',
+                  )}
+                >
+                  {catLabel}
+                </Link>
+                {subLabel && (
+                  <span
+                    className={cn(
+                      'inline-block text-[10px] px-3 py-1 bg-forest-900/85 text-gold-300 font-semibold tracking-widest uppercase border border-gold-500/30',
+                      isAmharic && 'font-amharic text-xs tracking-normal',
+                    )}
+                  >
+                    {subLabel}
+                  </span>
+                )}
+              </div>
 
               {/* Title */}
               <h1 className={cn(
@@ -194,7 +222,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
                     </span>
                   </div>
                 )}
-                {project.tags?.length > 0 && (
+                {project.tags && project.tags.length > 0 && (
                   <div className="py-3">
                     <div className="flex flex-wrap gap-2 mt-2">
                       {project.tags.map((tag: string) => (

@@ -31,7 +31,7 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "/am",
+      "destination": "/en",
       "permanent": false
     }
   ]
