@@ -3,8 +3,8 @@ import { getProjects } from '@/sanity/lib/client'
 import { ProjectsClient } from './ProjectsClient'
 
 export const metadata = {
-  title: 'Projects',
-  description: 'Browse all Golden Zaf Furniture and Interior projects',
+  title: 'Our Works',
+  description: 'Browse Golden Zaf works by category and subcategory.',
 }
 
 export default async function ProjectsPage() {

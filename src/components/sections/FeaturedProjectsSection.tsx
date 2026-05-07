@@ -36,6 +36,7 @@ export function FeaturedProjectsSection({ projects }: Props) {
   const t = useTranslations('projects')
   const locale = useLocale()
   const isAmharic = locale === 'am'
+  const worksTitle = isAmharic ? 'ስራዎቻችን' : 'Our Works'
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
 
   const displayProjects = projects.length > 0 ? projects : DEMO_PROJECTS
@@ -60,7 +61,7 @@ export function FeaturedProjectsSection({ projects }: Props) {
               {isAmharic ? 'ስራዎቻችን' : 'Our Portfolio'}
             </p>
             <h2 className={cn('section-title text-4xl sm:text-5xl text-[var(--text-primary)]', isAmharic && 'font-amharic')}>
-              {t('title')}
+              {worksTitle}
             </h2>
             <hr className="gold-divider w-16 mt-4" />
           </div>

@@ -66,7 +66,7 @@ export function CategoriesSection() {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.06 }}
               >
-                <Link href={`/${locale}/categories/${key}`}>
+                <Link href={`/${locale}/projects?category=${key}`}>
                   <div className="group card-glass relative overflow-hidden h-72 cursor-pointer">
                     <Image
                       src={categoryImages[key][0]}

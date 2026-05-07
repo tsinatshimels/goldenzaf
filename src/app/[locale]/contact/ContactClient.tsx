@@ -14,6 +14,12 @@ import {
   ExternalLink,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import {
+  CONTACT_PHONE_DISPLAY,
+  CONTACT_TEL_LINK,
+  TELEGRAM_LINK,
+  getWhatsAppLink,
+} from '@/lib/contact'
 import toast from 'react-hot-toast'
 
 const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || 'your_formspree_id'
@@ -68,6 +74,11 @@ export default function ContactClient() {
   })
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
+  const whatsappLink = getWhatsAppLink(
+    isAmharic
+      ? 'ሰላም! ስለ Golden Zaf ስራዎች ጥያቄ አለኝ።'
+      : 'Hello! I have an inquiry about Golden Zaf and your work.',
+  )
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -149,8 +160,8 @@ export default function ContactClient() {
               {
                 icon: Phone,
                 title: t('phone_label'),
-                content: '+251 XXX XXX XXX',
-                link: 'tel:+251',
+                content: CONTACT_PHONE_DISPLAY,
+                link: CONTACT_TEL_LINK,
               },
               {
                 icon: Mail,
@@ -203,10 +214,20 @@ export default function ContactClient() {
               </div>
             ))}
 
-            {/* WhatsApp */}
+            {/* Telegram + WhatsApp */}
             <a
-              href="https://wa.me/251"
+              href={TELEGRAM_LINK}
+              className="flex items-center gap-3 w-full btn-outline justify-center mt-4"
+            >
+              <Send className="w-4 h-4" />
+              <span className={isAmharic ? 'font-amharic' : ''}>
+                {isAmharic ? 'በTelegram ያግኙን' : 'Telegram Us'}
+              </span>
+            </a>
+            <a
+              href={whatsappLink}
               target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-3 w-full btn-gold justify-center mt-4"
             >
               <MessageSquare className="w-4 h-4" />
@@ -284,7 +305,7 @@ export default function ContactClient() {
                         type="tel"
                         value={form.phone}
                         onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                        placeholder="+251 XXX XXX XXX"
+                        placeholder={CONTACT_PHONE_DISPLAY}
                         className={inputClass}
                       />
                     </div>

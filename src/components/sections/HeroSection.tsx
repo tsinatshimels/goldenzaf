@@ -243,7 +243,7 @@ export function HeroSection() {
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
           <Link
-            href={`/${locale}/categories`}
+            href={`/${locale}/projects`}
             className={cn('btn-gold group', isAmharic && 'font-amharic')}
           >
             {t('cta_primary')}

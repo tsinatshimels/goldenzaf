@@ -73,6 +73,11 @@ function categoryTitle(value: string): string {
   )
 }
 
+function isSubcategoryValidForCategory(category: string | undefined, subcategory: string | undefined) {
+  if (!category || !subcategory) return true
+  return (SUBCATEGORIES[category] || []).some((item) => item.value === subcategory)
+}
+
 export const projectSchema = defineType({
   name: 'project',
   title: 'Project / ፕሮጀክት',
@@ -138,7 +143,17 @@ export const projectSchema = defineType({
         layout: 'dropdown',
         list: SUBCATEGORY_OPTIONS,
       },
-      validation: (Rule) => Rule.required().error('Please choose a subcategory.'),
+      validation: (Rule) =>
+        Rule.required()
+          .error('Please choose a subcategory.')
+          .custom((value, context) =>
+            isSubcategoryValidForCategory(
+              context.document?.category as string | undefined,
+              value as string | undefined,
+            )
+              ? true
+              : 'The selected subcategory does not belong to the chosen category.',
+          ),
     }),
     defineField({
       name: 'description',

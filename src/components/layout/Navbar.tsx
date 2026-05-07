@@ -22,6 +22,7 @@ export function Navbar({ locale }: NavbarProps) {
   const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
+  const worksLabel = locale === 'am' ? 'ስራዎቻችን' : 'Our Works'
 
   useEffect(() => {
     setMounted(true)
@@ -35,8 +36,7 @@ export function Navbar({ locale }: NavbarProps) {
 
   const navLinks = [
     { href: `/${locale}`, label: t('home') },
-    { href: `/${locale}/categories`, label: t('categories') },
-    { href: `/${locale}/projects`, label: t('projects') },
+    { href: `/${locale}/projects`, label: worksLabel },
     { href: `/${locale}/about`, label: t('about') },
     { href: `/${locale}/contact`, label: t('contact') },
   ]

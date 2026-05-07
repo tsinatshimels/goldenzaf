@@ -34,6 +34,7 @@ export function ProjectsClient({ serverProjects }: { serverProjects: any[] }) {
   const locale = useLocale()
   const isAmharic = locale === 'am'
   const search = useSearchParams()
+  const worksTitle = isAmharic ? 'ስራዎቻችን' : 'Our Works'
 
   const [activeCategory, setActiveCategory] = useState<string>('all')
   const [activeSub, setActiveSub] = useState<string>('all')
@@ -93,7 +94,7 @@ export function ProjectsClient({ serverProjects }: { serverProjects: any[] }) {
               isAmharic && 'font-amharic',
             )}
           >
-            {t('title')}
+            {worksTitle}
           </h1>
           <hr className="gold-divider w-24 mx-auto mb-4" />
           <p

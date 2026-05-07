@@ -170,7 +170,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
               {/* Category + Subcategory */}
               <div className="flex flex-wrap gap-2 mb-4">
                 <Link
-                  href={`/${locale}/categories/${projectCategory}`}
+                  href={`/${locale}/projects?category=${projectCategory}`}
                   className={cn(
                     'inline-block text-[10px] px-3 py-1 bg-gold-500 text-forest-900 font-bold tracking-widest uppercase hover:opacity-90 transition-opacity',
                     isAmharic && 'font-amharic text-xs tracking-normal',

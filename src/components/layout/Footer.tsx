@@ -1,8 +1,14 @@
 'use client'
 import Link from 'next/link'
 import { useTranslations, useLocale } from 'next-intl'
-import { Instagram, Facebook, Youtube, MapPin, Phone, Mail, Heart } from 'lucide-react'
+import { Instagram, Facebook, Youtube, MapPin, Phone, Mail, Heart, Send, MessageCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import {
+  CONTACT_PHONE_DISPLAY,
+  CONTACT_TEL_LINK,
+  TELEGRAM_LINK,
+  getWhatsAppLink,
+} from '@/lib/contact'
 
 export function Footer() {
   const t = useTranslations('footer')
@@ -11,6 +17,12 @@ export function Footer() {
   const tContact = useTranslations('contact')
   const locale = useLocale()
   const isAmharic = locale === 'am'
+  const worksLabel = isAmharic ? 'ስራዎቻችን' : 'Our Works'
+  const whatsappLink = getWhatsAppLink(
+    isAmharic
+      ? 'ሰላም! ስለ Golden Zaf ስራዎች ጥያቄ አለኝ።'
+      : 'Hello! I have an inquiry about Golden Zaf and your work.',
+  )
 
   const categories = [
     { key: 'living_room', label: tCategories('living_room') },
@@ -85,7 +97,7 @@ export function Footer() {
             <ul className="space-y-3">
               {[
                 { href: `/${locale}`, label: tNav('home') },
-                { href: `/${locale}/projects`, label: tNav('projects') },
+                { href: `/${locale}/projects`, label: worksLabel },
                 { href: `/${locale}/about`, label: tNav('about') },
                 { href: `/${locale}/contact`, label: tNav('contact') },
               ].map((link) => (
@@ -147,9 +159,21 @@ export function Footer() {
                 </span>
               </li>
               <li>
-                <a href="tel:+251" className="flex items-center gap-3 text-sm text-[var(--cream)]/60 hover:text-gold-500 transition-colors group">
+                <a href={TELEGRAM_LINK} className="flex items-center gap-3 text-sm text-[var(--cream)]/60 hover:text-gold-500 transition-colors group">
+                  <Send className="w-4 h-4 text-gold-500 shrink-0" />
+                  <span>{CONTACT_PHONE_DISPLAY}</span>
+                </a>
+              </li>
+              <li>
+                <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-[var(--cream)]/60 hover:text-gold-500 transition-colors group">
+                  <MessageCircle className="w-4 h-4 text-gold-500 shrink-0" />
+                  <span>{CONTACT_PHONE_DISPLAY}</span>
+                </a>
+              </li>
+              <li>
+                <a href={CONTACT_TEL_LINK} className="flex items-center gap-3 text-sm text-[var(--cream)]/60 hover:text-gold-500 transition-colors group">
                   <Phone className="w-4 h-4 text-gold-500 shrink-0" />
-                  <span>+251 (Your Number)</span>
+                  <span>{CONTACT_PHONE_DISPLAY}</span>
                 </a>
               </li>
               <li>
