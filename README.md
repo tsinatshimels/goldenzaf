@@ -1,54 +1,39 @@
-# Golden Zaf Furniture & Interior — Website
+# Golden Zaf Furniture & Interior
 
-A premium Next.js 14 + Sanity CMS website for Golden Zaf Furniture.
+A bilingual Next.js 14 + Sanity CMS website for Golden Zaf Furniture and Interior.
 
-**Live URL**: https://goldenzaf.com  
-**Stack**: Next.js 14, Sanity CMS, Tailwind CSS, Framer Motion, next-intl  
-**Languages**: Amharic (primary) + English  
-**Modes**: Dark + Light  
+Live URL: `https://goldenzaf.com`  
+Stack: `Next.js 14`, `Sanity`, `Tailwind CSS`, `Framer Motion`, `next-intl`  
+Languages: Amharic + English  
+Theme modes: Light + Dark
 
----
+## Setup
 
-## 🚀 Setup Guide (Step by Step)
-
-### Step 1: Install Dependencies
+### 1. Install dependencies
 
 ```bash
 cd goldenzaf
 npm install
 ```
 
----
+### 2. Create the Sanity project
 
-### Step 2: Create Sanity Project
+1. Go to `https://sanity.io`
+2. Create a new project named `goldenzaf`
+3. Use dataset `production`
+4. Copy the Sanity project ID
 
-1. Go to **https://sanity.io** and create a free account
-2. Click **"New Project"**
-3. Name it: `goldenzaf`
-4. Choose dataset: `production`
-5. Copy your **Project ID** (looks like: `abc12xyz`)
+### 3. Create a Sanity API token
 
----
+1. Open `Sanity -> Settings -> API -> Tokens`
+2. Create a token named `website-write`
+3. Give it `Editor` permission
+4. Copy the token
 
-### Step 3: Get Sanity API Token
- 
-1. In your Sanity project, go to **Settings → API → Tokens**
-2. Click **"Add API Token"**
-3. Name it: `website-write`
-4. Permissions: **"Editor"**
-5. Copy the token
+### 4. Configure environment variables
 
----
+Create `.env.local` and add:
 
-### Step 4: Set Up Environment Variables
-
-Copy `.env.local.example` to `.env.local` and fill in:
-
-```bash
-cp .env.local.example .env.local
-```
-
-Edit `.env.local`:
 ```env
 NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id_here
 NEXT_PUBLIC_SANITY_DATASET=production
@@ -58,73 +43,79 @@ NEXT_PUBLIC_FORMSPREE_ID=your_formspree_id_here
 NEXT_PUBLIC_SITE_URL=https://goldenzaf.com
 ```
 
----
+### 5. Configure Formspree
 
-### Step 5: Set Up Formspree (Contact Form)
+1. Go to `https://formspree.io`
+2. Create a form
+3. Copy the form ID
+4. Set `NEXT_PUBLIC_FORMSPREE_ID` in `.env.local`
 
-1. Go to **https://formspree.io** and create a free account
-2. Click **"New Form"**
-3. Set email to your company email
-4. Copy the Form ID (e.g., `xabcdefg`)
-5. Paste it into `.env.local` as `NEXT_PUBLIC_FORMSPREE_ID`
-
----
-
-### Step 6: Run Development Server
+### 6. Run the app
 
 ```bash
 npm run dev
 ```
 
-Website: **http://localhost:3000**  
-Sanity Studio: **http://localhost:3000/studio**
+Website: `http://localhost:3000`  
+Sanity Studio: `http://localhost:3000/studio`
 
----
+### 7. Replace the logo
 
-### Step 7: Add Your Logo
+Replace:
 
-Replace `public/images/logo.png` with the Golden Zaf logo image.
+`public/images/logo.png`
 
----
+## Content Workflow
 
-## 📸 How to Add Projects in Sanity Studio
+The public site now uses **Our Works** as the main browsing experience.
 
-1. Open **http://localhost:3000/studio**
-2. Click **"Projects / ፕሮጀክቶች"**
-3. Click **"Create New Document"**
+- `/[locale]/projects` is the main works browser
+- category links open filtered views inside `/[locale]/projects?category=...`
+- old `/[locale]/categories/...` routes redirect into the works flow
+
+## Adding Work Items in Sanity Studio
+
+1. Open `http://localhost:3000/studio`
+2. Open `Projects / ፕሮጀክቶች`
+3. Create a new document
 4. Fill in:
-   - **Title (English)**: The project name in English
-   - **Title (Amharic)**: The project name in Amharic
-   - **Slug**: Click "Generate" (auto-fills from title)
-   - **Category**: Select from dropdown
-   - **Cover Image**: Upload the main project photo
-   - **Images**: Add more photos for the gallery
-   - **Video URL** (optional): YouTube link
-   - **3D Model URL** (optional): Sketchfab link
-   - **Featured**: Check this to show on homepage
-5. Click **"Publish"**
+   - Title (English)
+   - Title (Amharic)
+   - Slug
+   - Category
+   - Subcategory
+   - Cover Image
+   - Gallery Images
+   - Video URL if needed
+   - 3D Model URL if needed
+   - Featured if it should appear on the homepage
+5. Publish
 
-### ✅ Image Upload — Auto Compression
+Important:
 
-When you upload images in Sanity Studio, they are automatically compressed:
-- Max size: **1MB**
-- Max width: **1920px**
-- Format: Optimized
+- Select the main category first
+- Then select the matching subcategory
+- Sanity now validates that the chosen subcategory belongs to the chosen category
 
----
+### Image upload behavior
 
-### How to Delete Images in Sanity
+Images uploaded in Sanity Studio are compressed automatically.
 
-1. Open the project in Studio
-2. Click on the image you want to remove
-3. Click the **"..." menu** → **"Delete"**
-4. Click **"Publish"** to save changes
+- Max size: `1MB`
+- Max width: `1920px`
+- Optimized format
 
----
+### Deleting images in Sanity
 
-## 🌐 Deployment on Vercel
+1. Open the document
+2. Select the image
+3. Use the `...` menu
+4. Delete the image
+5. Publish the document again
 
-### Step 1: Push to GitHub
+## Deployment on Vercel
+
+### 1. Push to GitHub
 
 ```bash
 git init
@@ -134,95 +125,121 @@ git remote add origin https://github.com/yourusername/goldenzaf.git
 git push -u origin main
 ```
 
-### Step 2: Deploy on Vercel
+### 2. Deploy
 
-1. Go to **https://vercel.com** and connect your GitHub
-2. Import the `goldenzaf` repository
-3. Add all environment variables from `.env.local`
-4. Click **Deploy**
+1. Open `https://vercel.com`
+2. Import the repository
+3. Add the same environment variables from `.env.local`
+4. Deploy
 
-### Step 3: Add CORS in Sanity
+### 3. Add Sanity CORS origins
 
-1. Go to **sanity.io → Your Project → Settings → API → CORS Origins**
-2. Add: `https://goldenzaf.com`
-3. Add: `https://goldenzaf.vercel.app`
-4. Enable **"Allow Credentials"** for Studio
+In `Sanity -> Settings -> API -> CORS Origins`, add:
 
----
+- `https://goldenzaf.com`
+- `https://goldenzaf.vercel.app`
 
-## 🎨 Customization
+Enable credentials for Studio if needed.
 
-### Change Colors
-Edit `tailwind.config.ts` — the `gold` and `forest` colors
+## Customization
 
-### Change Fonts
-Edit `src/app/layout.tsx` — the Google Fonts imports
+### Change colors
 
-### Add New Category
-1. Edit `sanity/schemas/project.ts` — add to the `category` options list
-2. Edit `src/lib/utils.ts` — add to `categoryLabels` and `categoryImages`
-3. Edit `messages/am.json` and `messages/en.json` — add translation
+Edit:
 
-### Update Translations
+`tailwind.config.ts`
+
+### Change fonts
+
+Edit:
+
+`src/app/layout.tsx`
+
+### Add a new category
+
+1. Update `sanity/schemas/project.ts`
+2. Update `src/lib/utils.ts`
+   - `CATEGORY_KEYS`
+   - `categoryLabels`
+   - `categoryImages`
+3. Update translations in:
+   - `messages/am.json`
+   - `messages/en.json`
+
+### Add a new subcategory
+
+1. Update `SUBCATEGORIES` in `sanity/schemas/project.ts`
+2. Update `subcategoriesByCategory` in `src/lib/utils.ts`
+3. Test the category/subcategory validation in Studio
+
+### Update translations
+
 - Amharic: `messages/am.json`
 - English: `messages/en.json`
 
----
+## Shared Contact Configuration
 
-## 📁 Project Structure
+Shared contact values now live in:
 
-```
+`src/lib/contact.ts`
+
+This powers:
+
+- Footer contact actions
+- Floating Telegram and WhatsApp buttons
+- Contact page quick actions
+
+If the business number changes later, update it once in `src/lib/contact.ts`.
+
+## Project Structure
+
+```text
 goldenzaf/
-├── messages/           # Translations
-│   ├── am.json         # Amharic (primary)
-│   └── en.json         # English
+├── messages/
+│   ├── am.json
+│   └── en.json
 ├── public/
-│   └── images/         # Static images (logo, etc.)
+│   └── images/
 ├── sanity/
-│   ├── schemas/        # CMS content types
-│   └── lib/client.ts   # Sanity queries
+│   ├── lib/
+│   ├── plugins/
+│   └── schemas/
 ├── src/
 │   ├── app/
-│   │   ├── [locale]/   # All website pages
-│   │   │   ├── page.tsx        # Home
-│   │   │   ├── projects/       # Projects list + detail
-│   │   │   ├── about/          # About page
-│   │   │   └── contact/        # Contact page
-│   │   └── studio/     # Sanity Studio (CMS)
+│   │   ├── [locale]/
+│   │   │   ├── page.tsx
+│   │   │   ├── projects/
+│   │   │   ├── about/
+│   │   │   ├── contact/
+│   │   │   └── categories/
+│   │   └── studio/
 │   ├── components/
-│   │   ├── layout/     # Navbar, Footer
-│   │   ├── sections/   # Hero, Categories, FAQ, etc.
-│   │   └── ui/         # Reusable UI components
-│   └── lib/
-│       ├── utils.ts    # Utilities + demo data
-│       └── imageUpload.ts  # Image compression
-├── sanity.config.ts    # Sanity Studio config
-├── middleware.ts        # i18n routing
-└── next.config.js      # Next.js config
+│   │   ├── layout/
+│   │   ├── sections/
+│   │   └── ui/
+│   ├── lib/
+│   │   ├── contact.ts
+│   │   └── utils.ts
+│   └── types/
+├── sanity.config.ts
+├── middleware.ts
+├── next.config.js
+└── package.json
 ```
 
----
+## Media Features
 
-## 🔧 Advanced Features
+### 3D models
 
-### 3D Models (Sketchfab)
-1. Upload your 3D model to **https://sketchfab.com**
-2. Click **"Embed"** → copy the iframe `src` URL
-3. Paste it in the project's **"3D Model URL"** field in Sanity
+1. Upload to `https://sketchfab.com`
+2. Copy the embed URL
+3. Paste it into the `3D Model URL` field
 
-### Videos (YouTube)
-1. Copy your YouTube video URL
-2. Paste it in the project's **"Video URL"** field
-3. It auto-embeds on the project page
+### Videos
 
-### WhatsApp Button
-Update the WhatsApp number in:
-- `src/components/layout/Footer.tsx`
-- `src/app/[locale]/contact/ContactClient.tsx`
+1. Copy the YouTube or Vimeo URL
+2. Paste it into the `Video URL` field
 
-Change `https://wa.me/251` to `https://wa.me/251XXXXXXXXX`
+## Support
 
----
-
-## 📧 Support
-For questions about this codebase, check the component files — they are heavily commented.
+For codebase questions, start with the component files and Sanity schemas.

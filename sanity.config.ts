@@ -9,19 +9,20 @@ const singletonTypes = new Set(['siteSettings'])
 const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
 
 const CATEGORY_LIST: { key: string; title: string }[] = [
-  { key: 'living_room', title: '🛋️  Living Room' },
-  { key: 'bedroom', title: '🛏️  Bedroom' },
-  { key: 'office', title: '🖥️  Office' },
-  { key: 'dining_kitchen', title: '🍽️  Dining & Kitchen' },
-  { key: 'cnc', title: '⚙️  CNC Products' },
-  { key: 'doors', title: '🚪  Doors' },
-  { key: 'interior', title: '🏠  Interior' },
-  { key: 'other', title: '📦  Other' },
+  { key: 'living_room', title: 'Living Room' },
+  { key: 'bedroom', title: 'Bedroom' },
+  { key: 'office', title: 'Office' },
+  { key: 'dining_kitchen', title: 'Dining & Kitchen' },
+  { key: 'cnc', title: 'CNC Products' },
+  { key: 'doors', title: 'Doors' },
+  { key: 'interior', title: 'Interior' },
+  { key: 'other', title: 'Other' },
 ]
 
 export default defineConfig({
   name: 'goldenzaf',
-  title: 'Golden Zaf Furniture and Interior — CMS',
+  basePath: '/studio',
+  title: 'Golden Zaf Furniture and Interior CMS',
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   plugins: [
@@ -31,23 +32,19 @@ export default defineConfig({
           .title('Golden Zaf CMS')
           .items([
             S.listItem()
-              .title('⚙️  Site Settings / ቅንብሮች')
+              .title('Site Settings')
               .id('siteSettings')
-              .child(
-                S.document()
-                  .schemaType('siteSettings')
-                  .documentId('siteSettings'),
-              ),
+              .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
             S.divider(),
             S.listItem()
-              .title('📁  All Projects / ሁሉም ፕሮጀክቶች')
+              .title('All Projects')
               .child(
                 S.documentTypeList('project')
                   .title('All Projects')
                   .defaultOrdering([{ field: 'createdAt', direction: 'desc' }]),
               ),
             S.listItem()
-              .title('⭐  Featured Projects')
+              .title('Featured Projects')
               .child(
                 S.documentList()
                   .title('Featured Projects')
@@ -55,41 +52,39 @@ export default defineConfig({
               ),
             S.divider(),
             S.listItem()
-              .title('🛋️  By Category & Subcategory')
+              .title('By Category & Subcategory')
               .child(
                 S.list()
                   .title('By Category & Subcategory')
                   .items(
-                    CATEGORY_LIST.map((c) =>
+                    CATEGORY_LIST.map((category) =>
                       S.listItem()
-                        .title(c.title)
+                        .title(category.title)
                         .child(
                           S.list()
-                            .title(c.title)
+                            .title(category.title)
                             .items([
                               S.listItem()
                                 .title('All in this category')
                                 .child(
                                   S.documentList()
-                                    .title(`${c.title} — All`)
-                                    .filter(
-                                      '_type == "project" && category == $category',
-                                    )
-                                    .params({ category: c.key }),
+                                    .title(`${category.title} - All`)
+                                    .filter('_type == "project" && category == $category')
+                                    .params({ category: category.key }),
                                 ),
                               S.divider(),
-                              ...(SUBCATEGORIES[c.key] || []).map((sub) =>
+                              ...(SUBCATEGORIES[category.key] || []).map((subcategory) =>
                                 S.listItem()
-                                  .title(`└ ${sub.title}`)
+                                  .title(subcategory.title)
                                   .child(
                                     S.documentList()
-                                      .title(`${c.title} — ${sub.title}`)
+                                      .title(`${category.title} - ${subcategory.title}`)
                                       .filter(
                                         '_type == "project" && category == $category && subcategory == $subcategory',
                                       )
                                       .params({
-                                        category: c.key,
-                                        subcategory: sub.value,
+                                        category: category.key,
+                                        subcategory: subcategory.value,
                                       }),
                                   ),
                               ),
@@ -99,7 +94,7 @@ export default defineConfig({
                   ),
               ),
             S.divider(),
-            S.documentTypeListItem('teamMember').title('👥  Team Members / ቡድን'),
+            S.documentTypeListItem('teamMember').title('Team Members'),
           ]),
     }),
     visionTool({ defaultApiVersion: '2024-01-01' }),

@@ -2,7 +2,7 @@ import { defineType, defineField } from 'sanity'
 
 export const siteSettingsSchema = defineType({
   name: 'siteSettings',
-  title: 'Site Settings / የጣቢያ ቅንብሮች',
+  title: 'Site Settings',
   type: 'document',
   fields: [
     defineField({

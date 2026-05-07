@@ -2,8 +2,7 @@ import { defineType, defineField } from 'sanity'
 
 /**
  * Subcategories grouped by parent category.
- * Admin first picks a category, then sees only the subcategories that
- * belong to that category. The website can then filter by either.
+ * Admins pick a category first, then assign a matching subcategory.
  */
 export const SUBCATEGORIES: Record<string, { value: string; title: string }[]> = {
   living_room: [
@@ -48,14 +47,11 @@ export const SUBCATEGORIES: Record<string, { value: string; title: string }[]> =
   other: [{ value: 'shoe_racks', title: 'Shoe Racks' }],
 }
 
-// Flat list for the Sanity dropdown (with "Category — Subcategory" labels so
-// admins always know what they're picking even at a glance).
-const SUBCATEGORY_OPTIONS = Object.entries(SUBCATEGORIES).flatMap(
-  ([cat, subs]) =>
-    subs.map((s) => ({
-      title: `${categoryTitle(cat)} — ${s.title}`,
-      value: s.value,
-    })),
+const SUBCATEGORY_OPTIONS = Object.entries(SUBCATEGORIES).flatMap(([category, subs]) =>
+  subs.map((sub) => ({
+    title: `${categoryTitle(category)} - ${sub.title}`,
+    value: sub.value,
+  })),
 )
 
 function categoryTitle(value: string): string {
@@ -73,14 +69,17 @@ function categoryTitle(value: string): string {
   )
 }
 
-function isSubcategoryValidForCategory(category: string | undefined, subcategory: string | undefined) {
+function isSubcategoryValidForCategory(
+  category: string | undefined,
+  subcategory: string | undefined,
+) {
   if (!category || !subcategory) return true
   return (SUBCATEGORIES[category] || []).some((item) => item.value === subcategory)
 }
 
 export const projectSchema = defineType({
   name: 'project',
-  title: 'Project / ፕሮጀክት',
+  title: 'Project',
   type: 'document',
   groups: [
     { name: 'content', title: 'Content', default: true },
@@ -97,46 +96,44 @@ export const projectSchema = defineType({
     }),
     defineField({
       name: 'titleAm',
-      title: 'Title (Amharic / አማርኛ)',
+      title: 'Title (Amharic)',
       type: 'string',
       group: 'content',
     }),
     defineField({
       name: 'slug',
-      title: 'Slug (URL)',
+      title: 'Slug',
       type: 'slug',
       options: { source: 'title', maxLength: 96 },
       group: 'meta',
       validation: (Rule) => Rule.required(),
     }),
-    // ── 1) Category (radio for fast picking) ──────────────────────────────
     defineField({
       name: 'category',
-      title: '1. Category / ምድብ',
+      title: 'Category',
       description: 'Pick the main category first.',
       type: 'string',
       group: 'content',
       options: {
         layout: 'radio',
         list: [
-          { title: '🛋️  Living Room Furniture', value: 'living_room' },
-          { title: '🛏️  Bedroom Furniture', value: 'bedroom' },
-          { title: '🖥️  Office Furniture', value: 'office' },
-          { title: '🍽️  Dining Room & Kitchen', value: 'dining_kitchen' },
-          { title: '⚙️  CNC Products', value: 'cnc' },
-          { title: '🚪  Doors', value: 'doors' },
-          { title: '🏠  Interior Design', value: 'interior' },
-          { title: '📦  Other', value: 'other' },
+          { title: 'Living Room Furniture', value: 'living_room' },
+          { title: 'Bedroom Furniture', value: 'bedroom' },
+          { title: 'Office Furniture', value: 'office' },
+          { title: 'Dining Room & Kitchen', value: 'dining_kitchen' },
+          { title: 'CNC Products', value: 'cnc' },
+          { title: 'Doors', value: 'doors' },
+          { title: 'Interior Design', value: 'interior' },
+          { title: 'Other', value: 'other' },
         ],
       },
       validation: (Rule) => Rule.required().error('Please choose a category.'),
     }),
-    // ── 2) Subcategory (filtered list) ────────────────────────────────────
     defineField({
       name: 'subcategory',
-      title: '2. Subcategory / ንዑስ ምድብ',
+      title: 'Subcategory',
       description:
-        'Pick the subcategory that matches the category above. The list shows every option labeled "Category — Subcategory".',
+        'Pick the subcategory that matches the category above. Each option is labeled as "Category - Subcategory".',
       type: 'string',
       group: 'content',
       options: {
@@ -164,14 +161,14 @@ export const projectSchema = defineType({
     }),
     defineField({
       name: 'descriptionAm',
-      title: 'Description (Amharic / አማርኛ)',
+      title: 'Description (Amharic)',
       type: 'text',
       rows: 4,
       group: 'content',
     }),
     defineField({
       name: 'coverImage',
-      title: 'Cover Image / ዋና ፎቶ',
+      title: 'Cover Image',
       type: 'image',
       options: { hotspot: true },
       group: 'media',
@@ -179,7 +176,7 @@ export const projectSchema = defineType({
     }),
     defineField({
       name: 'images',
-      title: 'Gallery Images / ፎቶዎች',
+      title: 'Gallery Images',
       type: 'array',
       group: 'media',
       of: [
@@ -196,21 +193,21 @@ export const projectSchema = defineType({
     }),
     defineField({
       name: 'videoUrl',
-      title: 'Video URL (YouTube/Vimeo) — Optional',
+      title: 'Video URL (optional)',
       type: 'url',
       group: 'media',
-      description: 'Paste a YouTube or Vimeo link',
+      description: 'Paste a YouTube or Vimeo link.',
     }),
     defineField({
       name: 'model3dUrl',
-      title: '3D Model URL (Sketchfab) — Optional',
+      title: '3D Model URL (optional)',
       type: 'url',
       group: 'media',
-      description: 'Paste a Sketchfab embed link',
+      description: 'Paste a Sketchfab embed link.',
     }),
     defineField({
       name: 'featured',
-      title: 'Featured on Homepage?',
+      title: 'Featured on Homepage',
       type: 'boolean',
       group: 'meta',
       initialValue: false,
@@ -238,12 +235,16 @@ export const projectSchema = defineType({
       media: 'coverImage',
     },
     prepare({ title, category, subcategory, media }) {
-      const cat = categoryTitle(category)
-      const sub =
+      const categoryLabel = categoryTitle(category)
+      const subcategoryLabel =
         subcategory &&
-        SUBCATEGORY_OPTIONS.find((o) => o.value === subcategory)?.title.split(' — ')[1]
-      const subtitle = sub ? `${cat} • ${sub}` : cat
-      return { title, subtitle, media }
+        SUBCATEGORY_OPTIONS.find((option) => option.value === subcategory)?.title.split(' - ')[1]
+
+      return {
+        title,
+        subtitle: subcategoryLabel ? `${categoryLabel} - ${subcategoryLabel}` : categoryLabel,
+        media,
+      }
     },
   },
   orderings: [
