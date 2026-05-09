@@ -28,7 +28,7 @@ function normalizeCompressedFile(original: File, compressed: File) {
 function buildAssetFromFile(file: File): AssetFromSource {
   return {
     kind: 'file',
-    value: file,
+    value: file as AssetFromSource['value'],
     assetDocumentProps: {
       originalFilename: file.name,
       source: {
