@@ -169,6 +169,8 @@ export const projectSchema = defineType({
     defineField({
       name: 'coverImage',
       title: 'Cover Image',
+      description:
+        'You can upload normally here, or use Select -> "Compressed Upload (Recommended)" to save Sanity storage.',
       type: 'image',
       options: { hotspot: true },
       group: 'media',
@@ -177,6 +179,8 @@ export const projectSchema = defineType({
     defineField({
       name: 'images',
       title: 'Gallery Images',
+      description:
+        'You can upload normally here, or use Select -> "Compressed Upload (Recommended)" to save Sanity storage.',
       type: 'array',
       group: 'media',
       of: [

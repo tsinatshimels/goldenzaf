@@ -8,6 +8,8 @@ import { GalleryStripSection } from '@/components/sections/GalleryStripSection'
 import { FAQSection } from '@/components/sections/FAQSection'
 import { CTASection } from '@/components/sections/CTASection'
 
+export const revalidate = 60
+
 export default async function HomePage() {
   let featuredProjects = []
   try {

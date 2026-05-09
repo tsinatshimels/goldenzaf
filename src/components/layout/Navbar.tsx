@@ -169,7 +169,7 @@ export function Navbar({ locale }: NavbarProps) {
       {/* Mobile Menu */}
       <div
         className={cn(
-          'lg:hidden overflow-hidden transition-all duration-300 bg-[var(--bg-primary)]/98 backdrop-blur-md border-t border-[var(--border)]',
+          'lg:hidden overflow-hidden transition-all duration-300 bg-[var(--bg-primary)] backdrop-blur-xl border-t border-gold-500/30 shadow-[0_20px_40px_rgba(0,0,0,0.6)]',
           mobileOpen ? 'max-h-[28rem] opacity-100' : 'max-h-0 opacity-0',
         )}
       >

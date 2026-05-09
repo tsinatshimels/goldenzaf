@@ -2,6 +2,9 @@ import { getProjectBySlug, getProjects } from '@/sanity/lib/client'
 import { notFound } from 'next/navigation'
 import { ProjectDetailClient } from './ProjectDetailClient'
 
+export const revalidate = 60
+export const dynamicParams = true
+
 export async function generateStaticParams() {
   try {
     const projects = await getProjects()

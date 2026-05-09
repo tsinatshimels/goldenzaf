@@ -17,6 +17,9 @@ import { cn } from '@/lib/utils'
 import {
   CONTACT_PHONE_DISPLAY,
   CONTACT_TEL_LINK,
+  CONTACT_PHONE_2_DISPLAY,
+  CONTACT_TEL_2_LINK,
+  CONTACT_EMAIL,
   TELEGRAM_LINK,
   getWhatsAppLink,
 } from '@/lib/contact'
@@ -32,22 +35,26 @@ const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || 'your_formspree_id'
  */
 const LOCATIONS = [
   {
-    label: 'Showroom',
-    labelAm: 'ሾውሩም',
-    name: 'Golden Zaf Showroom',
-    nameAm: 'Golden Zaf ሾውሩም',
+    label: 'Branch 1',
+    labelAm: 'ቅርንጫፍ 1',
+    name: 'Betel Apple Plaza, 1st Floor',
+    nameAm: 'ቤቴል አፕል ፕላዛ — 1ኛ ፎቅ',
     address: 'Addis Ababa, Ethiopia',
     addressAm: 'አዲስ አበባ, ኢትዮጵያ',
-    mapsQuery: 'Bole, Addis Ababa, Ethiopia',
+    // Embed search query — what Google Maps will look up inside the iframe.
+    mapsQuery: 'Betel Apple Plaza, Addis Ababa',
+    // Direct link the user shared — used by the "Open in Google Maps" button.
+    mapsLink: 'https://maps.app.goo.gl/VR9wnQCbvQgrrKPG9',
   },
   {
-    label: 'Workshop',
-    labelAm: 'ወርክሾፕ',
-    name: 'Golden Zaf Workshop',
-    nameAm: 'Golden Zaf ወርክሾፕ',
+    label: 'Branch 2',
+    labelAm: 'ቅርንጫፍ 2',
+    name: 'Mesalemiya — Around Girum Hospital',
+    nameAm: 'መሳለሚያ — ግሩም ሆስፒታል አካባቢ',
     address: 'Addis Ababa, Ethiopia',
     addressAm: 'አዲስ አበባ, ኢትዮጵያ',
-    mapsQuery: 'CMC, Addis Ababa, Ethiopia',
+    mapsQuery: 'Mesalemiya, Girum Hospital, Addis Ababa',
+    mapsLink: 'https://maps.app.goo.gl/aHEHSjvKs26b5Gwy6',
   },
 ] as const
 
@@ -164,10 +171,16 @@ export default function ContactClient() {
                 link: CONTACT_TEL_LINK,
               },
               {
+                icon: Phone,
+                title: isAmharic ? 'ሁለተኛ ስልክ' : 'Phone (alt)',
+                content: CONTACT_PHONE_2_DISPLAY,
+                link: CONTACT_TEL_2_LINK,
+              },
+              {
                 icon: Mail,
                 title: t('email_label'),
-                content: 'info@goldenzaf.com',
-                link: 'mailto:info@goldenzaf.com',
+                content: CONTACT_EMAIL,
+                link: `mailto:${CONTACT_EMAIL}`,
               },
               {
                 icon: Clock,
@@ -398,7 +411,7 @@ export default function ContactClient() {
               const name = isAmharic ? loc.nameAm : loc.name
               const addr = isAmharic ? loc.addressAm : loc.address
               const tag = isAmharic ? loc.labelAm : loc.label
-              const link = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(loc.mapsQuery)}`
+              const link = (loc as any).mapsLink ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(loc.mapsQuery)}`
               return (
                 <a
                   key={loc.name}

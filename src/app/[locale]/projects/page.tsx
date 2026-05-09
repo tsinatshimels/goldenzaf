@@ -2,6 +2,8 @@ import { Suspense } from 'react'
 import { getProjects } from '@/sanity/lib/client'
 import { ProjectsClient } from './ProjectsClient'
 
+export const revalidate = 60
+
 export const metadata = {
   title: 'Our Works',
   description: 'Browse Golden Zaf works by category and subcategory.',
