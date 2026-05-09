@@ -29,14 +29,6 @@ function buildAssetFromFile(file: File): AssetFromSource {
   return {
     kind: 'file',
     value: file as unknown as AssetFromSource['value'],
-    assetDocumentProps: {
-      originalFilename: file.name,
-      source: {
-        name: 'goldenzaf-compressed-upload',
-        id: `${file.name}-${file.size}-${file.lastModified}`,
-      },
-      description: 'Compressed before upload in Sanity Studio',
-    },
   }
 }
 
