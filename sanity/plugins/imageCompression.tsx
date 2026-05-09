@@ -36,9 +36,7 @@ function CompressedImageSource(props: AssetSourceComponentProps) {
   const inputRef = useRef<HTMLInputElement | null>(null)
   const [status, setStatus] = useState<'idle' | 'compressing' | 'error'>('idle')
   const [message, setMessage] = useState('Choose images to compress before they are stored.')
-  const selectionType = (props as AssetSourceComponentProps & { selectionType?: string })
-    .selectionType
-  const allowMultiple = selectionType === 'multiple'
+  const allowMultiple = false
 
   const header = useMemo(
     () => (allowMultiple ? 'Compressed Uploads' : 'Compressed Upload'),
