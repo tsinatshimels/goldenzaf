@@ -43,7 +43,6 @@ export const SUBCATEGORIES: Record<string, { value: string; title: string }[]> =
       { value: 'main_gate', title: 'Main Gate' },
     ],
     interior: [
-      { value: 'wall_finishing', title: 'Wall Finishing' },
       { value: 'shop', title: 'Shop' },
       { value: 'office_interior', title: 'Office Interior' },
       { value: 'living_interior', title: 'Living Interior' },

@@ -25,7 +25,7 @@ const DEMO_PROJECTS = [
   { _id: '5', title: 'CNC Carved Door', titleAm: 'CNC ተቀረጸ በር', slug: { current: 'demo-5' }, category: 'doors', subcategory: 'main_gate' },
   { _id: '6', title: 'Arabian Majlis', titleAm: 'አረቢያ ምቀኛ', slug: { current: 'demo-6' }, category: 'cnc', subcategory: 'arabian_majlis' },
   { _id: '7', title: 'Kitchen Cabinet Set', titleAm: 'የኩሽና ካቢኔ', slug: { current: 'demo-7' }, category: 'dining_kitchen', subcategory: 'kitchen_cabinets' },
-  { _id: '8', title: 'Interior Wall Finishing', titleAm: 'የውስጥ ግድግዳ ማቁያ', slug: { current: 'demo-8' }, category: 'interior', subcategory: 'wall_finishing' },
+  { _id: '8', title: 'Office Interior Concept', titleAm: 'የቢሮ ውስጥ ዲዛይን', slug: { current: 'demo-8' }, category: 'interior', subcategory: 'office_interior' },
   { _id: '9', title: 'Shoe Rack', titleAm: 'የጫማ ማቆያ', slug: { current: 'demo-9' }, category: 'other', subcategory: 'shoe_racks' },
 ]
 

@@ -12,10 +12,11 @@ const CATEGORY_LIST: { key: string; title: string }[] = [
   { key: 'living_room', title: 'Living Room' },
   { key: 'bedroom', title: 'Bedroom' },
   { key: 'office', title: 'Office' },
-  { key: 'dining_kitchen', title: 'Dining & Kitchen' },
+  { key: 'dining_kitchen', title: 'Kitchen & Dining Room' },
   { key: 'cnc', title: 'CNC Products' },
   { key: 'doors', title: 'Doors' },
   { key: 'interior', title: 'Interior' },
+  { key: 'materials', title: 'Materials' },
   { key: 'other', title: 'Other' },
 ]
 

@@ -90,7 +90,6 @@ export const subcategoriesByCategory: Record<CategoryKey, SubcategoryDef[]> = {
     { key: 'main_gate', en: 'Main Gate', am: 'ዋና ደጃፍ' },
   ],
   interior: [
-    { key: 'wall_finishing', en: 'Wall Finishing', am: 'የግድግዳ ማጠናቀቂያ' },
     { key: 'shop', en: 'Shop', am: 'ሱቅ' },
     { key: 'office_interior', en: 'Office Interior', am: 'የቢሮ ውስጥ ዲዛይን' },
     { key: 'living_interior', en: 'Living Interior', am: 'የሳሎን ውስጥ ዲዛይን' },
