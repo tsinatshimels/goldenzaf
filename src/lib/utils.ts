@@ -12,7 +12,6 @@ export function formatDate(dateStr: string, locale: string) {
   )
 }
 
-// ─── Categories ─────────────────────────────────────────────────────────────
 export type CategoryKey =
   | 'living_room'
   | 'bedroom'
@@ -21,6 +20,7 @@ export type CategoryKey =
   | 'cnc'
   | 'doors'
   | 'interior'
+  | 'materials'
   | 'other'
 
 export const CATEGORY_KEYS: CategoryKey[] = [
@@ -31,6 +31,7 @@ export const CATEGORY_KEYS: CategoryKey[] = [
   'cnc',
   'doors',
   'interior',
+  'materials',
   'other',
 ]
 
@@ -38,14 +39,14 @@ export const categoryLabels: Record<CategoryKey, { en: string; am: string }> = {
   living_room: { en: 'Living Room Furniture', am: 'የሳሎን ዕቃዎች' },
   bedroom: { en: 'Bedroom Furniture', am: 'የመኝታ ዕቃዎች' },
   office: { en: 'Office Furniture', am: 'የቢሮ ዕቃዎች' },
-  dining_kitchen: { en: 'Dining Room & Kitchen', am: 'የምግብ ቤት እና ኩሽና' },
+  dining_kitchen: { en: 'Kitchen & Dining Room', am: 'ኩሽና እና የምግብ ቤት' },
   cnc: { en: 'CNC Products', am: 'CNC ምርቶች' },
   doors: { en: 'Doors', am: 'በሮች' },
   interior: { en: 'Interior Design', am: 'የውስጥ ዲዛይን' },
+  materials: { en: 'Materials', am: 'ማቴሪያሎች' },
   other: { en: 'Other', am: 'ሌሎች' },
 }
 
-// ─── Subcategories ──────────────────────────────────────────────────────────
 export interface SubcategoryDef {
   key: string
   en: string
@@ -61,8 +62,7 @@ export const subcategoriesByCategory: Record<CategoryKey, SubcategoryDef[]> = {
     { key: 'dining_table_living', en: 'Dining Table', am: 'የምግብ ጠረጴዛ' },
   ],
   bedroom: [
-    { key: 'beds', en: 'Beds', am: 'አልጋዎች' },
-    { key: 'infant_bed', en: 'Infant Bed', am: 'የህፃን አልጋ' },
+    { key: 'infant_bed', en: 'Infant Bed', am: 'የሕፃን አልጋ' },
     { key: 'big_size_bed', en: 'Big-sized Bed', am: 'ትልቅ አልጋ' },
     { key: 'closet', en: 'Closet', am: 'ቁምሳጥን' },
     { key: 'walk_in_closet', en: 'Walk-in Closet', am: 'ዎክ-ኢን ቁምሳጥን' },
@@ -72,14 +72,12 @@ export const subcategoriesByCategory: Record<CategoryKey, SubcategoryDef[]> = {
   office: [
     { key: 'executive_desk', en: 'Executive Desk / Managerial Table', am: 'ዋና የቢሮ ጠረጴዛ' },
     { key: 'reception_desk', en: 'Reception Desk', am: 'የመቀበያ ጠረጴዛ' },
-    { key: 'office_chairs', en: 'Office Chairs', am: 'የቢሮ ወንበሮች' },
     { key: 'bookshelves_filing', en: 'Bookshelves & Filing Cabinets', am: 'የመጻሕፍት መደርደሪያ እና የፋይል ካቢኔ' },
     { key: 'conference_table', en: 'Conference Table', am: 'የስብሰባ ጠረጴዛ' },
   ],
   dining_kitchen: [
     { key: 'dining_sets', en: 'Dining Sets', am: 'የምግብ ስብስብ' },
     { key: 'kitchen_cabinets', en: 'Kitchen Cabinets', am: 'የኩሽና ካቢኔ' },
-    { key: 'sideboards_buffets', en: 'Sideboards & Buffets', am: 'የጎን መደርደሪያ' },
   ],
   cnc: [
     { key: 'arabian_majlis', en: 'Arabian Majlis', am: 'አረቢያ ምቀኛ' },
@@ -91,11 +89,21 @@ export const subcategoriesByCategory: Record<CategoryKey, SubcategoryDef[]> = {
     { key: 'internal_doors', en: 'Internal Doors', am: 'የውስጥ በሮች' },
     { key: 'main_gate', en: 'Main Gate', am: 'ዋና ደጃፍ' },
   ],
-  interior: [{ key: 'wall_finishing', en: 'Wall Finishing', am: 'የግድግዳ ማጠናቀቂያ' }],
+  interior: [
+    { key: 'wall_finishing', en: 'Wall Finishing', am: 'የግድግዳ ማጠናቀቂያ' },
+    { key: 'shop', en: 'Shop', am: 'ሱቅ' },
+    { key: 'office_interior', en: 'Office Interior', am: 'የቢሮ ውስጥ ዲዛይን' },
+    { key: 'living_interior', en: 'Living Interior', am: 'የሳሎን ውስጥ ዲዛይን' },
+  ],
+  materials: [
+    { key: 'mdf', en: 'MDF', am: 'MDF' },
+    { key: 'block_board', en: 'Block Board', am: 'Block Board' },
+    { key: 'australia', en: 'Australia', am: 'Australia' },
+    { key: 'ply_wood', en: 'Ply Wood', am: 'Ply Wood' },
+  ],
   other: [{ key: 'shoe_racks', en: 'Shoe Racks', am: 'የጫማ መደርደሪያ' }],
 }
 
-/** Flat key→label lookup for quick rendering of any subcategory value. */
 export const subcategoryLabels: Record<string, { en: string; am: string }> = (() => {
   const out: Record<string, { en: string; am: string }> = {}
   for (const subs of Object.values(subcategoriesByCategory)) {
@@ -104,7 +112,6 @@ export const subcategoryLabels: Record<string, { en: string; am: string }> = (()
   return out
 })()
 
-/** Reverse lookup: subcategory key → its parent category key. */
 export const subcategoryParent: Record<string, CategoryKey> = (() => {
   const out: Record<string, CategoryKey> = {}
   for (const [cat, subs] of Object.entries(subcategoriesByCategory)) {
@@ -113,7 +120,6 @@ export const subcategoryParent: Record<string, CategoryKey> = (() => {
   return out
 })()
 
-// ─── Image fallbacks ─────────────────────────────────────────────────────────
 export const categoryImages: Record<CategoryKey, string[]> = {
   living_room: [
     'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
@@ -150,19 +156,24 @@ export const categoryImages: Record<CategoryKey, string[]> = {
     'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80',
     'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
   ],
+  materials: [
+    'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80',
+    'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80',
+    'https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=800&q=80',
+  ],
   other: [
     'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
     'https://images.unsplash.com/photo-1591843644882-08d78b605c8d?w=800&q=80',
   ],
 }
 
-/** Get an image for a category/subcategory pair (subcategory falls back to its category). */
 export function getImageFor(category?: string, subcategory?: string): string {
-  const cat = (category && (category in categoryImages) ? category : 'living_room') as CategoryKey
+  const cat = (category && category in categoryImages ? category : 'living_room') as CategoryKey
   const arr = categoryImages[cat]
   if (!subcategory) return arr[0]
-  // Hash subcategory key into the array length to pick a stable image variant.
+
   let h = 0
   for (let i = 0; i < subcategory.length; i++) h = (h * 31 + subcategory.charCodeAt(i)) >>> 0
+
   return arr[h % arr.length]
 }

@@ -13,7 +13,7 @@
     "title_brand": "Golden Zaf",
     "title_trail": "Furniture and Interior",
     "title": "Golden Zaf Furniture and Interior",
-    "subtitle": "ብጁ የቤት ዕቃዎች እና ምርጥ የውስጥ ዲዛይን — በምርጥ ቁሳቁሶች በእጅ የተሰራ።",
+    "subtitle": "ጥራት ባለው MDF፣ WPC እና በተፈጥሮ እንጨት የታገዘ የቅንጦት የውስጥ ማስጌጫ።",
     "cta_primary": "ስራዎቻችንን ይመልከቱ",
     "cta_secondary": "ያግኙን",
     "scroll": "ወደ ታች ሸብልሉ"
@@ -30,10 +30,11 @@
     "living_room": "የሳሎን ዕቃዎች",
     "bedroom": "የመኝታ ዕቃዎች",
     "office": "የቢሮ ዕቃዎች",
-    "dining_kitchen": "የምግብ ቤት እና ኩሽና",
+    "dining_kitchen": "ኩሽና እና የምግብ ቤት",
     "cnc": "CNC ምርቶች",
     "doors": "በሮች",
     "interior": "የውስጥ ዲዛይን",
+    "materials": "ማቴሪያሎች",
     "other": "ሌሎች"
   },
   "projects": {

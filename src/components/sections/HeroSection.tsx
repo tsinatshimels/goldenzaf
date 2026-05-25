@@ -70,6 +70,7 @@ export function HeroSection() {
   }, [mouseX, mouseY])
 
   const rotatingWords = isAmharic ? ROTATING_WORDS_AM : ROTATING_WORDS_EN
+  const slogan = 'የእርስዎ ምናብ፣ የእኛ ጥበብ'
 
   // Split "Golden Zaf" into characters for staggered reveal.
   const brandText = 'Golden Zaf'
@@ -121,7 +122,7 @@ export function HeroSection() {
       <div className="absolute bottom-16 right-6 w-16 h-16 border-r-2 border-b-2 border-gold-500 opacity-60" />
 
       {/* Content */}
-      <div className="relative z-10 container-site text-center text-white">
+      <div className="relative z-10 container-site pb-24 text-center text-white sm:pb-28">
         {/* Eyebrow */}
         <motion.p
           initial={{ opacity: 0, y: 12, letterSpacing: '0.15em' }}
@@ -235,11 +236,20 @@ export function HeroSection() {
           {t('subtitle')}
         </motion.p>
 
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.8, duration: 0.7 }}
+          className="mx-auto mb-8 w-fit border border-gold-500/30 bg-black/15 px-5 py-2 text-sm text-gold-200/90 backdrop-blur-sm"
+        >
+          {slogan}
+        </motion.p>
+
         {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.85, duration: 0.7 }}
+          transition={{ delay: 1.95, duration: 0.7 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
           <Link
@@ -260,20 +270,21 @@ export function HeroSection() {
           </Link>
         </motion.div>
 
-        {/* Image indicators */}
-        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 flex gap-2">
-          {HERO_IMAGES.map((_, i) => (
-            <button
-              key={i}
-              aria-label={`Hero image ${i + 1}`}
-              onClick={() => setCurrentImage(i)}
-              className={cn(
-                'h-0.5 rounded-full transition-all duration-500',
-                i === currentImage ? 'w-8 bg-gold-500' : 'w-4 bg-white/30',
-              )}
-            />
-          ))}
-        </div>
+      </div>
+
+      {/* Image indicators */}
+      <div className="absolute bottom-24 left-1/2 z-10 flex -translate-x-1/2 gap-2 sm:bottom-28">
+        {HERO_IMAGES.map((_, i) => (
+          <button
+            key={i}
+            aria-label={`Hero image ${i + 1}`}
+            onClick={() => setCurrentImage(i)}
+            className={cn(
+              'h-0.5 rounded-full transition-all duration-500',
+              i === currentImage ? 'w-8 bg-gold-500' : 'w-4 bg-white/30',
+            )}
+          />
+        ))}
       </div>
 
       {/* Scroll indicator */}

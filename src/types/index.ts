@@ -40,6 +40,7 @@ export type ProjectCategory =
   | 'cnc'
   | 'doors'
   | 'interior'
+  | 'materials'
   | 'other'
 
 export interface SiteSettings {

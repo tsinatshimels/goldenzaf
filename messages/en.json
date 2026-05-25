@@ -30,10 +30,11 @@
     "living_room": "Living Room Furniture",
     "bedroom": "Bedroom Furniture",
     "office": "Office Furniture",
-    "dining_kitchen": "Dining Room & Kitchen",
+    "dining_kitchen": "Kitchen & Dining Room",
     "cnc": "CNC Products",
     "doors": "Doors",
     "interior": "Interior Design",
+    "materials": "Materials",
     "other": "Other Products"
   },
   "projects": {

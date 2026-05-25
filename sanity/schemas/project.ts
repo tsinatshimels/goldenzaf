@@ -4,54 +4,65 @@ import { defineType, defineField } from 'sanity'
  * Subcategories grouped by parent category.
  * Admins pick a category first, then assign a matching subcategory.
  */
-export const SUBCATEGORIES: Record<string, { value: string; title: string }[]> = {
-  living_room: [
-    { value: 'tv_stands', title: 'TV Stands' },
-    { value: 'coffee_side_tables', title: 'Coffee & Side Tables' },
-    { value: 'console_tables_mirrors', title: 'Console Tables & Mirrors' },
-    { value: 'center_table', title: 'Center Table' },
-    { value: 'dining_table_living', title: 'Dining Table' },
-  ],
-  bedroom: [
-    { value: 'beds', title: 'Beds' },
-    { value: 'infant_bed', title: 'Infant Bed' },
-    { value: 'big_size_bed', title: 'Big-sized Bed' },
-    { value: 'closet', title: 'Closet' },
-    { value: 'walk_in_closet', title: 'Walk-in Closet' },
-    { value: 'dressing_tables', title: 'Dressing Tables' },
-    { value: 'nightstands', title: 'Nightstands' },
-  ],
-  office: [
-    { value: 'executive_desk', title: 'Executive Desk / Managerial Table' },
-    { value: 'reception_desk', title: 'Reception Desk' },
-    { value: 'office_chairs', title: 'Office Chairs' },
-    { value: 'bookshelves_filing', title: 'Bookshelves & Filing Cabinets' },
-    { value: 'conference_table', title: 'Conference Table' },
-  ],
-  dining_kitchen: [
-    { value: 'dining_sets', title: 'Dining Sets' },
-    { value: 'kitchen_cabinets', title: 'Kitchen Cabinets' },
-    { value: 'sideboards_buffets', title: 'Sideboards & Buffets' },
-  ],
-  cnc: [
-    { value: 'arabian_majlis', title: 'Arabian Majlis' },
-    { value: 'partitions', title: 'Partitions' },
-    { value: 'patterns_logos', title: 'Patterns & Logos' },
-    { value: 'door_designs', title: 'Door Designs' },
-  ],
-  doors: [
-    { value: 'internal_doors', title: 'Internal Doors' },
-    { value: 'main_gate', title: 'Main Gate' },
-  ],
-  interior: [{ value: 'wall_finishing', title: 'Wall Finishing' }],
-  other: [{ value: 'shoe_racks', title: 'Shoe Racks' }],
-}
+export const SUBCATEGORIES: Record<string, { value: string; title: string }[]> =
+  {
+    living_room: [
+      { value: 'tv_stands', title: 'TV Stands' },
+      { value: 'coffee_side_tables', title: 'Coffee & Side Tables' },
+      { value: 'console_tables_mirrors', title: 'Console Tables & Mirrors' },
+      { value: 'center_table', title: 'Center Table' },
+      { value: 'dining_table_living', title: 'Dining Table' },
+    ],
+    bedroom: [
+      { value: 'infant_bed', title: 'Infant Bed' },
+      { value: 'big_size_bed', title: 'Big-sized Bed' },
+      { value: 'closet', title: 'Closet' },
+      { value: 'walk_in_closet', title: 'Walk-in Closet' },
+      { value: 'dressing_tables', title: 'Dressing Tables' },
+      { value: 'nightstands', title: 'Nightstands' },
+    ],
+    office: [
+      { value: 'executive_desk', title: 'Executive Desk / Managerial Table' },
+      { value: 'reception_desk', title: 'Reception Desk' },
 
-const SUBCATEGORY_OPTIONS = Object.entries(SUBCATEGORIES).flatMap(([category, subs]) =>
-  subs.map((sub) => ({
-    title: `${categoryTitle(category)} - ${sub.title}`,
-    value: sub.value,
-  })),
+      { value: 'bookshelves_filing', title: 'Bookshelves & Filing Cabinets' },
+      { value: 'conference_table', title: 'Conference Table' },
+    ],
+    dining_kitchen: [
+      { value: 'dining_sets', title: 'Dining Sets' },
+      { value: 'kitchen_cabinets', title: 'Kitchen Cabinets' },
+    ],
+    cnc: [
+      { value: 'arabian_majlis', title: 'Arabian Majlis' },
+      { value: 'partitions', title: 'Partitions' },
+      { value: 'patterns_logos', title: 'Patterns & Logos' },
+      { value: 'door_designs', title: 'Door Designs' },
+    ],
+    doors: [
+      { value: 'internal_doors', title: 'Internal Doors' },
+      { value: 'main_gate', title: 'Main Gate' },
+    ],
+    interior: [
+      { value: 'wall_finishing', title: 'Wall Finishing' },
+      { value: 'shop', title: 'Shop' },
+      { value: 'office_interior', title: 'Office Interior' },
+      { value: 'living_interior', title: 'Living Interior' },
+    ],
+    materials: [
+      { value: 'mdf', title: 'MDF' },
+      { value: 'block_board', title: 'Block Board' },
+      { value: 'australia', title: 'Australia' },
+      { value: 'ply_wood', title: 'Ply Wood' },
+    ],
+    other: [{ value: 'shoe_racks', title: 'Shoe Racks' }],
+  }
+
+const SUBCATEGORY_OPTIONS = Object.entries(SUBCATEGORIES).flatMap(
+  ([category, subs]) =>
+    subs.map((sub) => ({
+      title: `${categoryTitle(category)} - ${sub.title}`,
+      value: sub.value,
+    })),
 )
 
 function categoryTitle(value: string): string {
@@ -60,10 +71,11 @@ function categoryTitle(value: string): string {
       living_room: 'Living Room',
       bedroom: 'Bedroom',
       office: 'Office',
-      dining_kitchen: 'Dining & Kitchen',
+      dining_kitchen: 'Kitchen & Dining Room',
       cnc: 'CNC Products',
       doors: 'Doors',
       interior: 'Interior Design',
+      materials: 'Materials',
       other: 'Other',
     }[value] || value
   )
@@ -74,7 +86,9 @@ function isSubcategoryValidForCategory(
   subcategory: string | undefined,
 ) {
   if (!category || !subcategory) return true
-  return (SUBCATEGORIES[category] || []).some((item) => item.value === subcategory)
+  return (SUBCATEGORIES[category] || []).some(
+    (item) => item.value === subcategory,
+  )
 }
 
 export const projectSchema = defineType({
@@ -106,7 +120,6 @@ export const projectSchema = defineType({
       type: 'slug',
       options: { source: 'title', maxLength: 96 },
       group: 'meta',
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'category',
@@ -120,10 +133,11 @@ export const projectSchema = defineType({
           { title: 'Living Room Furniture', value: 'living_room' },
           { title: 'Bedroom Furniture', value: 'bedroom' },
           { title: 'Office Furniture', value: 'office' },
-          { title: 'Dining Room & Kitchen', value: 'dining_kitchen' },
+          { title: 'Kitchen & Dining Room', value: 'dining_kitchen' },
           { title: 'CNC Products', value: 'cnc' },
           { title: 'Doors', value: 'doors' },
           { title: 'Interior Design', value: 'interior' },
+          { title: 'Materials', value: 'materials' },
           { title: 'Other', value: 'other' },
         ],
       },
@@ -242,11 +256,15 @@ export const projectSchema = defineType({
       const categoryLabel = categoryTitle(category)
       const subcategoryLabel =
         subcategory &&
-        SUBCATEGORY_OPTIONS.find((option) => option.value === subcategory)?.title.split(' - ')[1]
+        SUBCATEGORY_OPTIONS.find(
+          (option) => option.value === subcategory,
+        )?.title.split(' - ')[1]
 
       return {
         title,
-        subtitle: subcategoryLabel ? `${categoryLabel} - ${subcategoryLabel}` : categoryLabel,
+        subtitle: subcategoryLabel
+          ? `${categoryLabel} - ${subcategoryLabel}`
+          : categoryLabel,
         media,
       }
     },

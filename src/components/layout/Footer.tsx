@@ -12,7 +12,7 @@ import {
   MessageCircle,
   Globe,
 } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { CATEGORY_KEYS, cn } from '@/lib/utils'
 import {
   CONTACT_PHONE_DISPLAY,
   CONTACT_TEL_LINK,
@@ -101,14 +101,9 @@ export function Footer() {
       : 'Hello! I have an inquiry about Golden Zaf and your work.',
   )
 
-  const categories = [
-    { key: 'living_room', label: tCategories('living_room') },
-    { key: 'bedroom', label: tCategories('bedroom') },
-    { key: 'office', label: tCategories('office') },
-    { key: 'dining_kitchen', label: tCategories('dining_kitchen') },
-    { key: 'cnc', label: tCategories('cnc') },
-    { key: 'doors', label: tCategories('doors') },
-  ]
+  const categories = CATEGORY_KEYS
+    .filter((key) => key !== 'other')
+    .map((key) => ({ key, label: tCategories(key) }))
 
   return (
     <footer className='relative bg-[var(--forest)] text-[var(--cream)] overflow-hidden'>
