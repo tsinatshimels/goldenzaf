@@ -33,8 +33,8 @@ export const metadata: Metadata = {
   keywords: [
     'Golden Zaf Furniture',
     'Golden Zaf Interior',
-    'Golden Zaf Furniture and Interior',
     'furniture Addis Ababa',
+    'Golden Zaf Furniture and Interior',
     'furniture Ethiopia',
     'custom furniture Addis Ababa',
     'interior design Addis Ababa',
@@ -71,10 +71,16 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html suppressHydrationWarning>
-      <body className={`${cormorant.variable} ${jost.variable} ${notoSerifEthiopic.variable}`}>
+      <body
+        className={`${cormorant.variable} ${jost.variable} ${notoSerifEthiopic.variable}`}
+      >
         {children}
       </body>
     </html>
