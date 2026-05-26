@@ -140,7 +140,7 @@ export const categoryImages: Record<CategoryKey, string[]> = {
     'https://images.unsplash.com/photo-1577412647305-991150c7d163?w=800&q=80',
   ],
   dining_kitchen: [
-    'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80',
+    '/images/kitchen.jpg',
     'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80',
     'https://images.unsplash.com/photo-1565183928294-7063f23ce0f8?w=800&q=80',
   ],
