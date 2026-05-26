@@ -37,9 +37,9 @@ export type ProjectCategory =
   | 'bedroom'
   | 'office'
   | 'dining_kitchen'
-  | 'cnc'
   | 'doors'
   | 'interior'
+  | 'wall_art'
   | 'materials'
   | 'other'
 

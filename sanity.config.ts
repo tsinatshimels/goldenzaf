@@ -13,9 +13,9 @@ const CATEGORY_LIST: { key: string; title: string }[] = [
   { key: 'bedroom', title: 'Bedroom' },
   { key: 'office', title: 'Office' },
   { key: 'dining_kitchen', title: 'Kitchen & Dining Room' },
-  { key: 'cnc', title: 'CNC Products' },
   { key: 'doors', title: 'Doors' },
   { key: 'interior', title: 'Interior' },
+  { key: 'wall_art', title: 'Wall Art' },
   { key: 'materials', title: 'Materials' },
   { key: 'other', title: 'Other' },
 ]

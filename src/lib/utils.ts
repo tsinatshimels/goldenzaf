@@ -17,9 +17,9 @@ export type CategoryKey =
   | 'bedroom'
   | 'office'
   | 'dining_kitchen'
-  | 'cnc'
   | 'doors'
   | 'interior'
+  | 'wall_art'
   | 'materials'
   | 'other'
 
@@ -28,9 +28,9 @@ export const CATEGORY_KEYS: CategoryKey[] = [
   'bedroom',
   'office',
   'dining_kitchen',
-  'cnc',
   'doors',
   'interior',
+  'wall_art',
   'materials',
   'other',
 ]
@@ -40,9 +40,9 @@ export const categoryLabels: Record<CategoryKey, { en: string; am: string }> = {
   bedroom: { en: 'Bedroom Furniture', am: 'የመኝታ ዕቃዎች' },
   office: { en: 'Office Furniture', am: 'የቢሮ ዕቃዎች' },
   dining_kitchen: { en: 'Kitchen & Dining Room', am: 'ኩሽና እና የምግብ ቤት' },
-  cnc: { en: 'CNC Products', am: 'CNC ምርቶች' },
   doors: { en: 'Doors', am: 'በሮች' },
   interior: { en: 'Interior Design', am: 'የውስጥ ዲዛይን' },
+  wall_art: { en: 'Wall Art', am: 'የግድግዳ ጥበብ' },
   materials: { en: 'Materials', am: 'ማቴሪያሎች' },
   other: { en: 'Other', am: 'ሌሎች' },
 }
@@ -55,7 +55,10 @@ export interface SubcategoryDef {
 
 export const subcategoriesByCategory: Record<CategoryKey, SubcategoryDef[]> = {
   living_room: [
-    { key: 'tv_stands', en: 'TV Stands', am: 'የቴሌቪዥን መቆሚያ' },
+    { key: 'tv_stand', en: 'TV Stand', am: 'የቴሌቪዥን መቆሚያ' },
+    { key: 'tv_unit', en: 'TV Unit', am: 'የቴሌቪዥን ዩኒት' },
+    { key: 'sofa', en: 'Sofa', am: 'ሶፋ' },
+    { key: 'book_shelf_living', en: 'Book Shelf', am: 'የመጽሐፍ መደርደሪያ' },
     { key: 'coffee_side_tables', en: 'Coffee & Side Tables', am: 'የቡና እና ጎን ጠረጴዛዎች' },
     { key: 'console_tables_mirrors', en: 'Console Tables & Mirrors', am: 'ኮንሶል ጠረጴዛ እና መስታወት' },
     { key: 'center_table', en: 'Center Table', am: 'መካከለኛ ጠረጴዛ' },
@@ -64,26 +67,23 @@ export const subcategoriesByCategory: Record<CategoryKey, SubcategoryDef[]> = {
   bedroom: [
     { key: 'infant_bed', en: 'Infant Bed', am: 'የሕፃን አልጋ' },
     { key: 'big_size_bed', en: 'Big-sized Bed', am: 'ትልቅ አልጋ' },
+    { key: 'kids_bed', en: 'Kids Bed', am: 'የልጆች አልጋ' },
     { key: 'closet', en: 'Closet', am: 'ቁምሳጥን' },
+    { key: 'chest_of_drawers', en: 'Chest of Drawers', am: 'ቼስት ኦፍ ድሮወርስ' },
     { key: 'walk_in_closet', en: 'Walk-in Closet', am: 'ዎክ-ኢን ቁምሳጥን' },
     { key: 'dressing_tables', en: 'Dressing Tables', am: 'የመልበሻ ጠረጴዛ' },
     { key: 'nightstands', en: 'Nightstands', am: 'የመኝታ ጎን ጠረጴዛ' },
+    { key: 'accent_chairs', en: 'Accent Chairs', am: 'አክሰንት ወንበሮች' },
   ],
   office: [
     { key: 'executive_desk', en: 'Executive Desk / Managerial Table', am: 'ዋና የቢሮ ጠረጴዛ' },
+    { key: 'computer_desk', en: 'Computer Desk', am: 'የኮምፒውተር ጠረጴዛ' },
     { key: 'reception_desk', en: 'Reception Desk', am: 'የመቀበያ ጠረጴዛ' },
     { key: 'bookshelves_filing', en: 'Bookshelves & Filing Cabinets', am: 'የመጻሕፍት መደርደሪያ እና የፋይል ካቢኔ' },
     { key: 'conference_table', en: 'Conference Table', am: 'የስብሰባ ጠረጴዛ' },
   ],
   dining_kitchen: [
-    { key: 'dining_sets', en: 'Dining Sets', am: 'የምግብ ስብስብ' },
     { key: 'kitchen_cabinets', en: 'Kitchen Cabinets', am: 'የኩሽና ካቢኔ' },
-  ],
-  cnc: [
-    { key: 'arabian_majlis', en: 'Arabian Majlis', am: 'አረቢያ ምቀኛ' },
-    { key: 'partitions', en: 'Partitions', am: 'መከፋፈያዎች' },
-    { key: 'patterns_logos', en: 'Patterns & Logos', am: 'ቅርጻ ቅርጽ እና ሎጎ' },
-    { key: 'door_designs', en: 'Door Designs', am: 'የበር ዲዛይን' },
   ],
   doors: [
     { key: 'internal_doors', en: 'Internal Doors', am: 'የውስጥ በሮች' },
@@ -94,13 +94,17 @@ export const subcategoriesByCategory: Record<CategoryKey, SubcategoryDef[]> = {
     { key: 'office_interior', en: 'Office Interior', am: 'የቢሮ ውስጥ ዲዛይን' },
     { key: 'living_interior', en: 'Living Interior', am: 'የሳሎን ውስጥ ዲዛይን' },
   ],
+  wall_art: [{ key: 'wall_art', en: 'Wall Art', am: 'የግድግዳ ጥበብ' }],
   materials: [
     { key: 'mdf', en: 'MDF', am: 'MDF' },
     { key: 'block_board', en: 'Block Board', am: 'Block Board' },
     { key: 'australia', en: 'Australia', am: 'Australia' },
     { key: 'ply_wood', en: 'Ply Wood', am: 'Ply Wood' },
   ],
-  other: [{ key: 'shoe_racks', en: 'Shoe Racks', am: 'የጫማ መደርደሪያ' }],
+  other: [
+    { key: 'shoe_rack', en: 'Shoe Rack', am: 'የጫማ መደርደሪያ' },
+    { key: 'book_shelf_other', en: 'Book Shelf', am: 'የመጽሐፍ መደርደሪያ' },
+  ],
 }
 
 export const subcategoryLabels: Record<string, { en: string; am: string }> = (() => {
@@ -140,11 +144,6 @@ export const categoryImages: Record<CategoryKey, string[]> = {
     'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80',
     'https://images.unsplash.com/photo-1565183928294-7063f23ce0f8?w=800&q=80',
   ],
-  cnc: [
-    'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800&q=80',
-    'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80',
-    'https://images.unsplash.com/photo-1582582621959-48d27397dc69?w=800&q=80',
-  ],
   doors: [
     'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
     'https://images.unsplash.com/photo-1601760561441-16420502c7e0?w=800&q=80',
@@ -154,6 +153,11 @@ export const categoryImages: Record<CategoryKey, string[]> = {
     'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80',
     'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80',
     'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
+  ],
+  wall_art: [
+    'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=800&q=80',
+    'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80',
+    'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80',
   ],
   materials: [
     'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80',

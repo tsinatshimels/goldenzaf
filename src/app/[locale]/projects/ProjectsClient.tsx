@@ -21,12 +21,12 @@ const DEMO_PROJECTS = [
   { _id: '1', title: 'Modern Sofa Set', titleAm: 'ዘመናዊ ሶፋ', slug: { current: 'demo-1' }, category: 'living_room', subcategory: 'center_table' },
   { _id: '2', title: 'Executive Office Desk', titleAm: 'ዋና የቢሮ ጠረጴዛ', slug: { current: 'demo-2' }, category: 'office', subcategory: 'executive_desk' },
   { _id: '3', title: 'King Bedroom Set', titleAm: 'ዋና የመኝታ ዕቃ', slug: { current: 'demo-3' }, category: 'bedroom', subcategory: 'big_size_bed' },
-  { _id: '4', title: 'Dining Table & Chairs', titleAm: 'የምግብ ጠረጴዛ', slug: { current: 'demo-4' }, category: 'dining_kitchen', subcategory: 'dining_sets' },
+  { _id: '4', title: 'Kitchen Cabinet Set', titleAm: 'የኩሽና ካቢኔ', slug: { current: 'demo-4' }, category: 'dining_kitchen', subcategory: 'kitchen_cabinets' },
   { _id: '5', title: 'CNC Carved Door', titleAm: 'CNC ተቀረጸ በር', slug: { current: 'demo-5' }, category: 'doors', subcategory: 'main_gate' },
-  { _id: '6', title: 'Arabian Majlis', titleAm: 'አረቢያ ምቀኛ', slug: { current: 'demo-6' }, category: 'cnc', subcategory: 'arabian_majlis' },
+  { _id: '6', title: 'Wall Art Frame', titleAm: 'የግድግዳ ጥበብ ፍሬም', slug: { current: 'demo-6' }, category: 'wall_art', subcategory: 'wall_art' },
   { _id: '7', title: 'Kitchen Cabinet Set', titleAm: 'የኩሽና ካቢኔ', slug: { current: 'demo-7' }, category: 'dining_kitchen', subcategory: 'kitchen_cabinets' },
   { _id: '8', title: 'Office Interior Concept', titleAm: 'የቢሮ ውስጥ ዲዛይን', slug: { current: 'demo-8' }, category: 'interior', subcategory: 'office_interior' },
-  { _id: '9', title: 'Shoe Rack', titleAm: 'የጫማ ማቆያ', slug: { current: 'demo-9' }, category: 'other', subcategory: 'shoe_racks' },
+  { _id: '9', title: 'Shoe Rack', titleAm: 'የጫማ ማቆያ', slug: { current: 'demo-9' }, category: 'other', subcategory: 'shoe_rack' },
 ]
 
 export function ProjectsClient({ serverProjects }: { serverProjects: any[] }) {

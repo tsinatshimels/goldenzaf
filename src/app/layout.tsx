@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     template: '%s | Golden Zaf Furniture and Interior',
   },
   description:
-    'Golden Zaf Furniture and Interior — premium furniture and interior design solutions for living rooms, bedrooms, offices, dining rooms, doors, and CNC craftwork.',
+    'Golden Zaf Furniture and Interior — premium furniture and interior design solutions for living rooms, bedrooms, offices, kitchen and dining rooms, doors, wall art, and materials.',
   keywords: [
     'Golden Zaf Furniture',
     'Golden Zaf Interior',
@@ -46,8 +46,8 @@ export const metadata: Metadata = {
     'dining room furniture Addis Ababa',
     'doors Addis Ababa',
     'wooden doors Ethiopia',
-    'CNC furniture Ethiopia',
-    'CNC design Addis Ababa',
+    'wall art Addis Ababa',
+    'furniture materials Addis Ababa',
     'bespoke furniture Ethiopia',
     'Ethiopia',
     'Addis Ababa',

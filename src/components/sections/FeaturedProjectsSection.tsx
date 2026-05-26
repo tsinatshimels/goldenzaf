@@ -27,7 +27,7 @@ const DEMO_PROJECTS: Project[] = [
   { _id: '1', title: 'Modern Living Room Set', titleAm: 'ዘመናዊ የሳሎን ዕቃ', slug: { current: 'demo-1' }, category: 'living_room', description: 'Elegant living room furniture collection' },
   { _id: '2', title: 'Executive Office Suite', titleAm: 'ዋና የቢሮ ዕቃ', slug: { current: 'demo-2' }, category: 'office', description: 'Professional office furniture setup' },
   { _id: '3', title: 'Master Bedroom Collection', titleAm: 'ዋና የመኝታ ዕቃ', slug: { current: 'demo-3' }, category: 'bedroom', description: 'Luxury bedroom furniture set' },
-  { _id: '4', title: 'CNC Carved Majlis', titleAm: 'CNC ተቀረጸ ምቀኛ', slug: { current: 'demo-4' }, category: 'cnc', description: 'Intricate Arabian Majlis with CNC craftsmanship' },
+  { _id: '4', title: 'Gallery Wall Art', titleAm: 'የግድግዳ ጥበብ', slug: { current: 'demo-4' }, category: 'wall_art', description: 'Decorative wall art with a refined handcrafted finish' },
   { _id: '5', title: 'Custom Main Gate', titleAm: 'ብጁ ዋና ደጃፍ', slug: { current: 'demo-5' }, category: 'doors', description: 'Handcrafted solid wood main gate' },
   { _id: '6', title: 'Dining Room Set', titleAm: 'የምግብ ቤት ዕቃ', slug: { current: 'demo-6' }, category: 'dining_kitchen', description: 'Complete dining room furniture collection' },
 ]
