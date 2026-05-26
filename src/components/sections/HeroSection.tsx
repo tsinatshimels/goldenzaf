@@ -122,7 +122,7 @@ export function HeroSection() {
       <div className="absolute bottom-16 right-6 w-16 h-16 border-r-2 border-b-2 border-gold-500 opacity-60" />
 
       {/* Content */}
-      <div className="relative z-10 container-site pb-24 text-center text-white sm:pb-28">
+      <div className="relative z-10 container-site pb-24 pt-12 text-center text-white sm:pb-28 sm:pt-16">
         {/* Eyebrow */}
         <motion.p
           initial={{ opacity: 0, y: 12, letterSpacing: '0.15em' }}

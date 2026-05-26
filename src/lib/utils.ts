@@ -80,7 +80,7 @@ export const subcategoriesByCategory: Record<CategoryKey, SubcategoryDef[]> = {
     { key: 'computer_desk', en: 'Computer Desk', am: 'የኮምፒውተር ጠረጴዛ' },
     { key: 'reception_desk', en: 'Reception Desk', am: 'የመቀበያ ጠረጴዛ' },
     { key: 'bookshelves_filing', en: 'Bookshelves & Filing Cabinets', am: 'የመጻሕፍት መደርደሪያ እና የፋይል ካቢኔ' },
-    { key: 'conference_table', en: 'Conference Table', am: 'የስብሰባ ጠረጴዛ' },
+    { key: 'conference_table', en: 'Conference and Meeting Tables', am: 'የኮንፈረንስ እና የስብሰባ ጠረጴዛዎች' },
   ],
   dining_kitchen: [
     { key: 'kitchen_cabinets', en: 'Kitchen Cabinets', am: 'የኩሽና ካቢኔ' },

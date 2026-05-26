@@ -33,7 +33,7 @@ export const SUBCATEGORIES: Record<string, { value: string; title: string }[]> =
       { value: 'reception_desk', title: 'Reception Desk' },
 
       { value: 'bookshelves_filing', title: 'Bookshelves & Filing Cabinets' },
-      { value: 'conference_table', title: 'Conference Table' },
+      { value: 'conference_table', title: 'Conference and Meeting Tables' },
     ],
     dining_kitchen: [
       { value: 'kitchen_cabinets', title: 'Kitchen Cabinets' },
