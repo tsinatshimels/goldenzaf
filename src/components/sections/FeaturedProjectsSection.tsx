@@ -5,14 +5,13 @@ import { useTranslations, useLocale } from 'next-intl'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
-import { cn, categoryLabels, categoryImages, type CategoryKey } from '@/lib/utils'
-import { urlFor } from '@/sanity/lib/client'
+import { cn, categoryLabels, getProjectHref, type CategoryKey } from '@/lib/utils'
 
 interface Project {
   _id: string
   title: string
   titleAm?: string
-  slug: { current: string }
+  slug?: { current?: string | null } | null
   category: string
   description?: string
   descriptionAm?: string
@@ -32,6 +31,13 @@ const DEMO_PROJECTS: Project[] = [
   { _id: '6', title: 'Dining Room Set', titleAm: 'የምግብ ቤት ዕቃ', slug: { current: 'demo-6' }, category: 'dining_kitchen', description: 'Complete dining room furniture collection' },
 ]
 
+const RECENT_WORK_IMAGES = [
+  '/images/Living.png',
+  '/images/Bedroom.png',
+  '/images/Interior.png',
+  '/images/Wall Art 1.png',
+]
+
 export function FeaturedProjectsSection({ projects }: Props) {
   const t = useTranslations('projects')
   const locale = useLocale()
@@ -41,11 +47,8 @@ export function FeaturedProjectsSection({ projects }: Props) {
 
   const displayProjects = projects.length > 0 ? projects : DEMO_PROJECTS
 
-  const getProjectImage = (project: Project) => {
-    if (project.coverImage) return urlFor(project.coverImage).width(800).url()
-    const cat = project.category as CategoryKey
-    return categoryImages[cat]?.[0] || categoryImages.living_room[0]
-  }
+  const getProjectImage = (index: number) =>
+    RECENT_WORK_IMAGES[index % RECENT_WORK_IMAGES.length]
 
   return (
     <section className="py-24 bg-[var(--bg-secondary)]" ref={ref}>
@@ -77,6 +80,51 @@ export function FeaturedProjectsSection({ projects }: Props) {
             const desc = isAmharic ? (project.descriptionAm || project.description) : project.description
             const cat = project.category as CategoryKey
             const catLabel = isAmharic ? categoryLabels[cat]?.am : categoryLabels[cat]?.en
+            const href = getProjectHref(locale, project)
+
+            const content = (
+              <>
+                <div className="relative h-64 overflow-hidden">
+                  <Image
+                    src={getProjectImage(i)}
+                    alt={title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className={cn(
+                      'object-cover transition-transform duration-700',
+                      href && 'group-hover:scale-105',
+                    )}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute top-4 left-4">
+                    <span className={cn('text-xs px-3 py-1 bg-gold-500 text-forest-900 font-semibold tracking-wider', isAmharic && 'font-amharic text-[11px]')}>
+                      {catLabel}
+                    </span>
+                  </div>
+                  {href && (
+                    <div className="absolute top-4 right-4 w-8 h-8 bg-white/10 backdrop-blur-sm border border-white/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                      <ArrowUpRight className="w-4 h-4 text-white" />
+                    </div>
+                  )}
+                </div>
+                <div className="p-6">
+                  <h3 className={cn('font-display text-xl font-semibold text-[var(--text-primary)] mb-2 line-clamp-1', href && 'group-hover:text-gold-500 transition-colors', isAmharic && 'font-amharic text-lg')}>
+                    {title}
+                  </h3>
+                  {desc && (
+                    <p className={cn('text-sm text-[var(--text-secondary)] line-clamp-2', isAmharic && 'font-amharic text-base')}>
+                      {desc}
+                    </p>
+                  )}
+                  {href && (
+                    <div className="mt-4 flex items-center gap-2 text-gold-500 text-sm font-semibold">
+                      <span className={isAmharic ? 'font-amharic' : ''}>{t('view_project')}</span>
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </div>
+                  )}
+                </div>
+              </>
+            )
 
             return (
               <motion.article
@@ -86,40 +134,7 @@ export function FeaturedProjectsSection({ projects }: Props) {
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 className={cn('group card-glass overflow-hidden', i === 0 && 'md:col-span-2 lg:col-span-1')}
               >
-                <Link href={`/${locale}/projects/${project.slug.current}`}>
-                  <div className="relative h-64 overflow-hidden">
-                    <Image
-                      src={getProjectImage(project)}
-                      alt={title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    <div className="absolute top-4 left-4">
-                      <span className={cn('text-xs px-3 py-1 bg-gold-500 text-forest-900 font-semibold tracking-wider', isAmharic && 'font-amharic text-[11px]')}>
-                        {catLabel}
-                      </span>
-                    </div>
-                    <div className="absolute top-4 right-4 w-8 h-8 bg-white/10 backdrop-blur-sm border border-white/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                      <ArrowUpRight className="w-4 h-4 text-white" />
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className={cn('font-display text-xl font-semibold text-[var(--text-primary)] mb-2 group-hover:text-gold-500 transition-colors line-clamp-1', isAmharic && 'font-amharic text-lg')}>
-                      {title}
-                    </h3>
-                    {desc && (
-                      <p className={cn('text-sm text-[var(--text-secondary)] line-clamp-2', isAmharic && 'font-amharic text-base')}>
-                        {desc}
-                      </p>
-                    )}
-                    <div className="mt-4 flex items-center gap-2 text-gold-500 text-sm font-semibold">
-                      <span className={isAmharic ? 'font-amharic' : ''}>{t('view_project')}</span>
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </div>
-                  </div>
-                </Link>
+                {href ? <Link href={href}>{content}</Link> : content}
               </motion.article>
             )
           })}

@@ -7,8 +7,7 @@ import { defineType, defineField } from 'sanity'
 export const SUBCATEGORIES: Record<string, { value: string; title: string }[]> =
   {
     living_room: [
-      { value: 'tv_stand', title: 'TV Stand' },
-      { value: 'tv_unit', title: 'TV Unit' },
+      { value: 'tv_unit_stand', title: 'TV Unit & Stand' },
       { value: 'sofa', title: 'Sofa' },
       { value: 'book_shelf_living', title: 'Book Shelf' },
       { value: 'coffee_side_tables', title: 'Coffee & Side Tables' },
@@ -74,7 +73,7 @@ function categoryTitle(value: string): string {
       living_room: 'Living Room',
       bedroom: 'Bedroom',
       office: 'Office',
-      dining_kitchen: 'Kitchen & Dining Room',
+      dining_kitchen: 'Kitchen',
       doors: 'Doors',
       interior: 'Interior Design',
       wall_art: 'Wall Art',
@@ -136,7 +135,7 @@ export const projectSchema = defineType({
           { title: 'Living Room Furniture', value: 'living_room' },
           { title: 'Bedroom Furniture', value: 'bedroom' },
           { title: 'Office Furniture', value: 'office' },
-          { title: 'Kitchen & Dining Room', value: 'dining_kitchen' },
+          { title: 'Kitchen', value: 'dining_kitchen' },
           { title: 'Doors', value: 'doors' },
           { title: 'Interior Design', value: 'interior' },
           { title: 'Wall Art', value: 'wall_art' },

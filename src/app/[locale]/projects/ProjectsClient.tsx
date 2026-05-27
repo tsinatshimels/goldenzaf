@@ -10,6 +10,7 @@ import {
   cn,
   CATEGORY_KEYS,
   categoryLabels,
+  getProjectHref,
   subcategoriesByCategory,
   subcategoryLabels,
   getImageFor,
@@ -40,7 +41,6 @@ export function ProjectsClient({ serverProjects }: { serverProjects: any[] }) {
   const [activeSub, setActiveSub] = useState<string>('all')
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
 
-  // Pre-select category from ?category=... query param (used by CategoriesSection links).
   useEffect(() => {
     const c = search?.get('category')
     if (c && (CATEGORY_KEYS as string[]).includes(c)) {
@@ -69,7 +69,7 @@ export function ProjectsClient({ serverProjects }: { serverProjects: any[] }) {
       try {
         return urlFor(p.coverImage).width(800).url()
       } catch {
-        // ignore
+        // ignore invalid Sanity image data and fall back
       }
     }
     return getImageFor(p.category, p.subcategory)
@@ -78,7 +78,6 @@ export function ProjectsClient({ serverProjects }: { serverProjects: any[] }) {
   return (
     <div className="pt-28 pb-24 bg-[var(--bg-primary)] min-h-screen">
       <div className="container-site">
-        {/* Page header */}
         <div className="text-center mb-12">
           <p
             className={cn(
@@ -107,7 +106,6 @@ export function ProjectsClient({ serverProjects }: { serverProjects: any[] }) {
           </p>
         </div>
 
-        {/* Category bar */}
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
           <div className="flex flex-wrap gap-2">
             <button
@@ -176,7 +174,6 @@ export function ProjectsClient({ serverProjects }: { serverProjects: any[] }) {
           </div>
         </div>
 
-        {/* Subcategory bar (drills in when a category is picked) */}
         <AnimatePresence>
           {subOptions.length > 0 && (
             <motion.div
@@ -254,6 +251,7 @@ export function ProjectsClient({ serverProjects }: { serverProjects: any[] }) {
                 const title = isAmharic
                   ? project.titleAm || project.title
                   : project.title
+                const href = getProjectHref(locale, project)
                 const catLabel = isAmharic
                   ? categoryLabels[project.category as CategoryKey]?.am
                   : categoryLabels[project.category as CategoryKey]?.en
@@ -264,6 +262,46 @@ export function ProjectsClient({ serverProjects }: { serverProjects: any[] }) {
                   : undefined
 
                 if (viewMode === 'list') {
+                  const content = (
+                    <div className="group card-glass flex items-center gap-4 p-4 overflow-hidden">
+                      <div className="relative w-20 h-20 shrink-0 overflow-hidden">
+                        <Image
+                          src={getImage(project)}
+                          alt={title}
+                          fill
+                          sizes="80px"
+                          className={cn(
+                            'object-cover transition-transform duration-500',
+                            href && 'group-hover:scale-110',
+                          )}
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <span className="text-[10px] text-gold-500 uppercase tracking-wider font-semibold">
+                          {catLabel}
+                          {subLabel && (
+                            <span className="opacity-70">
+                              {' '}
+                              · {subLabel}
+                            </span>
+                          )}
+                        </span>
+                        <h3
+                          className={cn(
+                            'font-display text-lg font-semibold text-[var(--text-primary)] truncate',
+                            href && 'group-hover:text-gold-500 transition-colors',
+                            isAmharic && 'font-amharic',
+                          )}
+                        >
+                          {title}
+                        </h3>
+                      </div>
+                      {href && (
+                        <ArrowUpRight className="w-5 h-5 text-[var(--text-muted)] group-hover:text-gold-500 transition-colors shrink-0" />
+                      )}
+                    </div>
+                  )
+
                   return (
                     <motion.div
                       key={project._id}
@@ -271,42 +309,78 @@ export function ProjectsClient({ serverProjects }: { serverProjects: any[] }) {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.04 }}
                     >
-                      <Link href={`/${locale}/projects/${project.slug.current}`}>
-                        <div className="group card-glass flex items-center gap-4 p-4 overflow-hidden">
-                          <div className="relative w-20 h-20 shrink-0 overflow-hidden">
-                            <Image
-                              src={getImage(project)}
-                              alt={title}
-                              fill
-                              sizes="80px"
-                              className="object-cover group-hover:scale-110 transition-transform duration-500"
-                            />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <span className="text-[10px] text-gold-500 uppercase tracking-wider font-semibold">
-                              {catLabel}
-                              {subLabel && (
-                                <span className="opacity-70">
-                                  {' '}
-                                  · {subLabel}
-                                </span>
-                              )}
-                            </span>
-                            <h3
-                              className={cn(
-                                'font-display text-lg font-semibold text-[var(--text-primary)] group-hover:text-gold-500 transition-colors truncate',
-                                isAmharic && 'font-amharic',
-                              )}
-                            >
-                              {title}
-                            </h3>
-                          </div>
-                          <ArrowUpRight className="w-5 h-5 text-[var(--text-muted)] group-hover:text-gold-500 transition-colors shrink-0" />
-                        </div>
-                      </Link>
+                      {href ? <Link href={href}>{content}</Link> : content}
                     </motion.div>
                   )
                 }
+
+                const content = (
+                  <div className="group card-glass overflow-hidden">
+                    <div className="relative h-56 overflow-hidden">
+                      <Image
+                        src={getImage(project)}
+                        alt={title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className={cn(
+                          'object-cover transition-transform duration-700',
+                          href && 'group-hover:scale-105',
+                        )}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+                        <span
+                          className={cn(
+                            'text-[10px] px-2.5 py-1 bg-gold-500 text-forest-900 font-bold tracking-wider uppercase w-max',
+                            isAmharic && 'font-amharic text-[10px]',
+                          )}
+                        >
+                          {catLabel}
+                        </span>
+                        {subLabel && (
+                          <span
+                            className={cn(
+                              'text-[10px] px-2.5 py-1 bg-forest-900/85 text-gold-300 font-semibold tracking-wider uppercase w-max',
+                              isAmharic && 'font-amharic text-[10px]',
+                            )}
+                          >
+                            {subLabel}
+                          </span>
+                        )}
+                      </div>
+                      {href && (
+                        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="w-8 h-8 bg-white/10 backdrop-blur flex items-center justify-center border border-white/20">
+                            <ArrowUpRight className="w-4 h-4 text-white" />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-4">
+                      <h3
+                        className={cn(
+                          'font-display text-lg font-semibold text-[var(--text-primary)]',
+                          href && 'group-hover:text-gold-500 transition-colors',
+                          isAmharic && 'font-amharic',
+                        )}
+                      >
+                        {title}
+                      </h3>
+                      {project.description && (
+                        <p
+                          className={cn(
+                            'text-sm text-[var(--text-muted)] mt-1 line-clamp-1',
+                            isAmharic && 'font-amharic',
+                          )}
+                        >
+                          {isAmharic
+                            ? project.descriptionAm
+                            : project.description}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                )
 
                 return (
                   <motion.div
@@ -315,67 +389,7 @@ export function ProjectsClient({ serverProjects }: { serverProjects: any[] }) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.05 }}
                   >
-                    <Link href={`/${locale}/projects/${project.slug.current}`}>
-                      <div className="group card-glass overflow-hidden">
-                        <div className="relative h-56 overflow-hidden">
-                          <Image
-                            src={getImage(project)}
-                            alt={title}
-                            fill
-                            sizes="(max-width: 768px) 100vw, 33vw"
-                            className="object-cover group-hover:scale-105 transition-transform duration-700"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                          <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-                            <span
-                              className={cn(
-                                'text-[10px] px-2.5 py-1 bg-gold-500 text-forest-900 font-bold tracking-wider uppercase w-max',
-                                isAmharic && 'font-amharic text-[10px]',
-                              )}
-                            >
-                              {catLabel}
-                            </span>
-                            {subLabel && (
-                              <span
-                                className={cn(
-                                  'text-[10px] px-2.5 py-1 bg-forest-900/85 text-gold-300 font-semibold tracking-wider uppercase w-max',
-                                  isAmharic && 'font-amharic text-[10px]',
-                                )}
-                              >
-                                {subLabel}
-                              </span>
-                            )}
-                          </div>
-                          <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <div className="w-8 h-8 bg-white/10 backdrop-blur flex items-center justify-center border border-white/20">
-                              <ArrowUpRight className="w-4 h-4 text-white" />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="p-4">
-                          <h3
-                            className={cn(
-                              'font-display text-lg font-semibold text-[var(--text-primary)] group-hover:text-gold-500 transition-colors',
-                              isAmharic && 'font-amharic',
-                            )}
-                          >
-                            {title}
-                          </h3>
-                          {project.description && (
-                            <p
-                              className={cn(
-                                'text-sm text-[var(--text-muted)] mt-1 line-clamp-1',
-                                isAmharic && 'font-amharic',
-                              )}
-                            >
-                              {isAmharic
-                                ? project.descriptionAm
-                                : project.description}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    </Link>
+                    {href ? <Link href={href}>{content}</Link> : content}
                   </motion.div>
                 )
               })

@@ -11,6 +11,7 @@ import {
   subcategoriesByCategory,
   subcategoryLabels,
   getImageFor,
+  getProjectHref,
   type CategoryKey,
 } from '@/lib/utils'
 import { urlFor } from '@/sanity/lib/client'
@@ -33,7 +34,6 @@ export function CategoryDetailClient({ category, projects }: Props) {
     return projects.filter((p) => p.subcategory === activeSub)
   }, [projects, activeSub])
 
-  // Per-subcategory counts so empty subs visibly disable.
   const counts: Record<string, number> = useMemo(() => {
     const c: Record<string, number> = { all: projects.length }
     for (const s of subs) c[s.key] = 0
@@ -48,7 +48,7 @@ export function CategoryDetailClient({ category, projects }: Props) {
       try {
         return urlFor(p.coverImage).width(800).url()
       } catch {
-        // ignore
+        // ignore invalid Sanity image data and fall back
       }
     }
     return getImageFor(category, p.subcategory)
@@ -57,7 +57,6 @@ export function CategoryDetailClient({ category, projects }: Props) {
   return (
     <div className="pt-28 pb-24 bg-[var(--bg-primary)] min-h-screen">
       <div className="container-site">
-        {/* Back link */}
         <div className="mb-6">
           <Link
             href={`/${locale}/categories`}
@@ -71,7 +70,6 @@ export function CategoryDetailClient({ category, projects }: Props) {
           </Link>
         </div>
 
-        {/* Header */}
         <div className="mb-10">
           <p
             className={cn(
@@ -101,7 +99,6 @@ export function CategoryDetailClient({ category, projects }: Props) {
           </p>
         </div>
 
-        {/* Subcategory filter pills */}
         <div className="flex flex-wrap gap-2 mb-10">
           <button
             onClick={() => setActiveSub('all')}
@@ -137,7 +134,6 @@ export function CategoryDetailClient({ category, projects }: Props) {
           })}
         </div>
 
-        {/* Pieces grid */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeSub}
@@ -163,12 +159,61 @@ export function CategoryDetailClient({ category, projects }: Props) {
                 const title = isAmharic
                   ? project.titleAm || project.title
                   : project.title
+                const href = getProjectHref(locale, project)
                 const subKey: string | undefined = project.subcategory
                 const subLabel = subKey
                   ? isAmharic
                     ? subcategoryLabels[subKey]?.am
                     : subcategoryLabels[subKey]?.en
                   : undefined
+
+                const content = (
+                  <div className="group card-glass overflow-hidden">
+                    <div className="relative h-56 overflow-hidden">
+                      <Image
+                        src={getImage(project)}
+                        alt={title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className={cn(
+                          'object-cover transition-transform duration-700',
+                          href && 'group-hover:scale-105',
+                        )}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+                      {subLabel && (
+                        <div className="absolute top-3 left-3">
+                          <span
+                            className={cn(
+                              'text-[10px] px-2.5 py-1 bg-gold-500 text-forest-900 font-bold tracking-wider uppercase',
+                              isAmharic && 'font-amharic text-[10px]',
+                            )}
+                          >
+                            {subLabel}
+                          </span>
+                        </div>
+                      )}
+                      {href && (
+                        <div className="absolute top-3 right-3 w-8 h-8 bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+                          <ArrowUpRight className="w-4 h-4 text-white" />
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-4">
+                      <h3
+                        className={cn(
+                          'font-display text-lg font-semibold text-[var(--text-primary)]',
+                          href && 'group-hover:text-gold-500 transition-colors',
+                          isAmharic && 'font-amharic',
+                        )}
+                      >
+                        {title}
+                      </h3>
+                    </div>
+                  </div>
+                )
+
                 return (
                   <motion.div
                     key={project._id}
@@ -176,48 +221,7 @@ export function CategoryDetailClient({ category, projects }: Props) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.45, delay: i * 0.04 }}
                   >
-                    <Link
-                      href={`/${locale}/projects/${project.slug.current}`}
-                    >
-                      <div className="group card-glass overflow-hidden">
-                        <div className="relative h-56 overflow-hidden">
-                          <Image
-                            src={getImage(project)}
-                            alt={title}
-                            fill
-                            sizes="(max-width: 768px) 100vw, 33vw"
-                            className="object-cover transition-transform duration-700 group-hover:scale-105"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-                          {subLabel && (
-                            <div className="absolute top-3 left-3">
-                              <span
-                                className={cn(
-                                  'text-[10px] px-2.5 py-1 bg-gold-500 text-forest-900 font-bold tracking-wider uppercase',
-                                  isAmharic && 'font-amharic text-[10px]',
-                                )}
-                              >
-                                {subLabel}
-                              </span>
-                            </div>
-                          )}
-                          <div className="absolute top-3 right-3 w-8 h-8 bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
-                            <ArrowUpRight className="w-4 h-4 text-white" />
-                          </div>
-                        </div>
-                        <div className="p-4">
-                          <h3
-                            className={cn(
-                              'font-display text-lg font-semibold text-[var(--text-primary)] group-hover:text-gold-500 transition-colors',
-                              isAmharic && 'font-amharic',
-                            )}
-                          >
-                            {title}
-                          </h3>
-                        </div>
-                      </div>
-                    </Link>
+                    {href ? <Link href={href}>{content}</Link> : content}
                   </motion.div>
                 )
               })

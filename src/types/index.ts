@@ -18,7 +18,7 @@ export interface Project {
   _id: string
   title: string
   titleAm?: string
-  slug: { current: string }
+  slug?: { current?: string | null } | null
   category: ProjectCategory
   subcategory?: string
   description?: string

@@ -8,14 +8,14 @@ import { Instagram } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const GALLERY_IMAGES = [
-  { src: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500&q=80', alt: 'Living Room' },
-  { src: 'https://images.unsplash.com/photo-1505693314120-0d443867891c?w=500&q=80', alt: 'Bedroom' },
-  { src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=500&q=80', alt: 'Office' },
-  { src: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&q=80', alt: 'Dining' },
-  { src: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=500&q=80', alt: 'CNC' },
-  { src: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=500&q=80', alt: 'Interior' },
-  { src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80', alt: 'Doors' },
-  { src: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=500&q=80', alt: 'Design' },
+  { src: '/images/Living.png', alt: 'Living Room' },
+  { src: '/images/Bedroom.png', alt: 'Bedroom' },
+  { src: '/images/Office.png', alt: 'Office' },
+  { src: '/images/kitchen.jpg', alt: 'Kitchen' },
+  { src: '/images/DOOR (1).png', alt: 'Doors' },
+  { src: '/images/Interior.png', alt: 'Interior' },
+  { src: '/images/Wall Art 1.png', alt: 'Wall Art' },
+  { src: '/images/Material.jpg', alt: 'Materials' },
 ]
 
 export function GalleryStripSection() {

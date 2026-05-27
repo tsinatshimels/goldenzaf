@@ -12,6 +12,19 @@ export function formatDate(dateStr: string, locale: string) {
   )
 }
 
+export function getProjectSlug(project: { slug?: { current?: string | null } | null }) {
+  const current = project.slug?.current?.trim()
+  return current ? current : null
+}
+
+export function getProjectHref(
+  locale: string,
+  project: { slug?: { current?: string | null } | null },
+) {
+  const slug = getProjectSlug(project)
+  return slug ? `/${locale}/projects/${slug}` : null
+}
+
 export type CategoryKey =
   | 'living_room'
   | 'bedroom'
@@ -39,7 +52,7 @@ export const categoryLabels: Record<CategoryKey, { en: string; am: string }> = {
   living_room: { en: 'Living Room Furniture', am: 'የሳሎን ዕቃዎች' },
   bedroom: { en: 'Bedroom Furniture', am: 'የመኝታ ዕቃዎች' },
   office: { en: 'Office Furniture', am: 'የቢሮ ዕቃዎች' },
-  dining_kitchen: { en: 'Kitchen & Dining Room', am: 'ኩሽና እና የምግብ ቤት' },
+  dining_kitchen: { en: 'Kitchen', am: 'ኩሽና' },
   doors: { en: 'Doors', am: 'በሮች' },
   interior: { en: 'Interior Design', am: 'የውስጥ ዲዛይን' },
   wall_art: { en: 'Wall Art', am: 'የግድግዳ ጥበብ' },
@@ -55,8 +68,7 @@ export interface SubcategoryDef {
 
 export const subcategoriesByCategory: Record<CategoryKey, SubcategoryDef[]> = {
   living_room: [
-    { key: 'tv_stand', en: 'TV Stand', am: 'የቴሌቪዥን መቆሚያ' },
-    { key: 'tv_unit', en: 'TV Unit', am: 'የቴሌቪዥን ዩኒት' },
+    { key: 'tv_unit_stand', en: 'TV Unit & Stand', am: 'የቴሌቪዥን ዩኒት እና ስታንድ' },
     { key: 'sofa', en: 'Sofa', am: 'ሶፋ' },
     { key: 'book_shelf_living', en: 'Book Shelf', am: 'የመጽሐፍ መደርደሪያ' },
     { key: 'coffee_side_tables', en: 'Coffee & Side Tables', am: 'የቡና እና ጎን ጠረጴዛዎች' },
@@ -125,17 +137,17 @@ export const subcategoryParent: Record<string, CategoryKey> = (() => {
 
 export const categoryImages: Record<CategoryKey, string[]> = {
   living_room: [
-    'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
+    '/images/Living.png',
     'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=800&q=80',
     'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&q=80',
   ],
   bedroom: [
-    'https://images.unsplash.com/photo-1505693314120-0d443867891c?w=800&q=80',
+    '/images/Bedroom.png',
     'https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=800&q=80',
     'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&q=80',
   ],
   office: [
-    'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
+    '/images/Office.png',
     'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=800&q=80',
     'https://images.unsplash.com/photo-1577412647305-991150c7d163?w=800&q=80',
   ],
@@ -145,27 +157,27 @@ export const categoryImages: Record<CategoryKey, string[]> = {
     'https://images.unsplash.com/photo-1565183928294-7063f23ce0f8?w=800&q=80',
   ],
   doors: [
-    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    '/images/DOOR (1).png',
     'https://images.unsplash.com/photo-1601760561441-16420502c7e0?w=800&q=80',
     'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=800&q=80',
   ],
   interior: [
-    'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80',
+    '/images/Interior.png',
     'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80',
     'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
   ],
   wall_art: [
-    'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=800&q=80',
+    '/images/Wall Art 1.png',
     'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80',
     'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80',
   ],
   materials: [
-    'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80',
+    '/images/Material.jpg',
     'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80',
     'https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=800&q=80',
   ],
   other: [
-    'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
+    '/images/Others.png',
     'https://images.unsplash.com/photo-1591843644882-08d78b605c8d?w=800&q=80',
   ],
 }

@@ -1,4 +1,5 @@
 import { getProjectBySlug, getProjects } from '@/sanity/lib/client'
+import { getProjectSlug } from '@/lib/utils'
 import { notFound } from 'next/navigation'
 import { ProjectDetailClient } from './ProjectDetailClient'
 
@@ -8,7 +9,10 @@ export const dynamicParams = true
 export async function generateStaticParams() {
   try {
     const projects = await getProjects()
-    return projects.map((p: any) => ({ slug: p.slug.current }))
+    return projects
+      .map((p: any) => getProjectSlug(p))
+      .filter((slug: string | null): slug is string => Boolean(slug))
+      .map((slug: string) => ({ slug }))
   } catch {
     return []
   }

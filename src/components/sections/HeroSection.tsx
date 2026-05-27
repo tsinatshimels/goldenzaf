@@ -14,10 +14,10 @@ import {
 } from 'framer-motion'
 
 const HERO_IMAGES = [
-  'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=90',
-  'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1920&q=90',
-  'https://images.unsplash.com/photo-1505693314120-0d443867891c?w=1920&q=90',
-  'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=90',
+  '/images/Bedroom.png',
+  '/images/Interior.png',
+  '/images/Living.png',
+  '/images/Wall Art 1.png',
 ]
 
 // Rotating words: animated below the brand. Localized.

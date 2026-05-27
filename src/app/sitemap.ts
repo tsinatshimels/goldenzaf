@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { getProjects } from '@/sanity/lib/client'
+import { getProjectSlug } from '@/lib/utils'
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://goldenzaf.com'
 const LOCALES = ['am', 'en']
@@ -38,12 +39,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ])
 
   const projectRoutes: MetadataRoute.Sitemap = LOCALES.flatMap((locale) =>
-    projects.map((project) => ({
-      url: `${BASE_URL}/${locale}/projects/${project.slug.current}`,
-      lastModified: project.createdAt ? new Date(project.createdAt) : new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
-    }))
+    projects.reduce<MetadataRoute.Sitemap>((acc, project) => {
+      const slug = getProjectSlug(project)
+      if (!slug) return acc
+
+      acc.push({
+        url: `${BASE_URL}/${locale}/projects/${slug}`,
+        lastModified: project.createdAt ? new Date(project.createdAt) : new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.8,
+      })
+
+      return acc
+    }, [])
   )
 
   return [...staticRoutes, ...projectRoutes]
