@@ -46,7 +46,7 @@ export const projectBySlugQuery = `*[_type == "project" && (
   titleAm == $slug
 )][0] {
   _id, title, titleAm, slug, category, subcategory, description, descriptionAm,
-  images[]{ ..., asset-> }, coverImage, videoUrl, model3dUrl, createdAt, tags
+  images, coverImage, videoUrl, model3dUrl, createdAt, tags
 }`
 
 export const siteSettingsQuery = `*[_type == "siteSettings"][0] {

@@ -40,7 +40,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
   const projectImages = project.images ?? []
 
   const toImageUrl = (image: any) => {
-    if (!image?.asset?._ref) return null
+    if (!image?.asset?._ref && !image?.asset?._id) return null
 
     try {
       return urlFor(image).width(1200).url()
@@ -49,10 +49,12 @@ export function ProjectDetailClient({ project }: { project: Project }) {
     }
   }
 
-  const galleryImages = projectImages.length > 0
-    ? projectImages
-        .map((img: any) => toImageUrl(img))
-        .filter((img): img is string => Boolean(img))
+  const mappedGalleryImages = projectImages
+    .map((img: any) => toImageUrl(img))
+    .filter((img): img is string => Boolean(img))
+
+  const galleryImages = mappedGalleryImages.length > 0
+    ? mappedGalleryImages
     : categoryImages[projectCategory]
 
   const coverImageUrl = toImageUrl(project.coverImage) || galleryImages[0] || categoryImages[projectCategory][0]
