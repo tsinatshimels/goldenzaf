@@ -8,7 +8,6 @@ import { ArrowLeft, Images, Play, Box, X, ChevronLeft, ChevronRight } from 'luci
 import {
   cn,
   categoryLabels,
-  categoryImages,
   subcategoryLabels,
   CATEGORY_KEYS,
   type CategoryKey,
@@ -53,13 +52,10 @@ export function ProjectDetailClient({ project }: { project: Project }) {
     .map((img: any) => toImageUrl(img))
     .filter((img): img is string => Boolean(img))
 
-  const galleryImages = mappedGalleryImages.length > 0
-    ? mappedGalleryImages
-    : categoryImages[projectCategory]
-
-  const coverImageUrl = toImageUrl(project.coverImage) || galleryImages[0] || categoryImages[projectCategory][0]
-
-  const allImages = [coverImageUrl, ...galleryImages.filter((g: string) => g !== coverImageUrl)]
+  const coverImageUrl = toImageUrl(project.coverImage) || mappedGalleryImages[0] || null
+  const allImages = coverImageUrl
+    ? [coverImageUrl, ...mappedGalleryImages.filter((g: string) => g !== coverImageUrl)]
+    : mappedGalleryImages
 
   const tabs: { id: Tab; label: string; icon: any; show: boolean }[] = [
     { id: 'gallery', label: t('gallery'), icon: Images, show: true },
@@ -114,28 +110,34 @@ export function ProjectDetailClient({ project }: { project: Project }) {
             {/* Gallery tab */}
             {activeTab === 'gallery' && (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                {/* Main image */}
-                <div
-                  className="relative h-80 sm:h-96 lg:h-[500px] mb-3 overflow-hidden cursor-zoom-in"
-                  onClick={() => setLightboxIndex(0)}
-                >
-                  <Image src={allImages[0]} alt={title} fill className="object-cover" />
-                  <div className="absolute inset-0 bg-black/10 hover:bg-black/0 transition-colors" />
-                </div>
+                {allImages.length > 0 ? (
+                  <>
+                    {/* Main image */}
+                    <div
+                      className="relative h-80 sm:h-96 lg:h-[500px] mb-3 overflow-hidden cursor-zoom-in"
+                      onClick={() => setLightboxIndex(0)}
+                    >
+                      <Image src={allImages[0]} alt={title} fill className="object-cover" />
+                      <div className="absolute inset-0 bg-black/10 hover:bg-black/0 transition-colors" />
+                    </div>
 
-                {/* Thumbnail strip */}
-                {allImages.length > 1 && (
-                  <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
-                    {allImages.map((img: string, i: number) => (
-                      <div
-                        key={i}
-                        className="relative h-16 sm:h-20 overflow-hidden cursor-pointer border-2 border-transparent hover:border-gold-500 transition-colors"
-                        onClick={() => setLightboxIndex(i)}
-                      >
-                        <Image src={img} alt={`${title} ${i + 1}`} fill className="object-cover" />
+                    {/* Thumbnail strip */}
+                    {allImages.length > 1 && (
+                      <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
+                        {allImages.map((img: string, i: number) => (
+                          <div
+                            key={i}
+                            className="relative h-16 sm:h-20 overflow-hidden cursor-pointer border-2 border-transparent hover:border-gold-500 transition-colors"
+                            onClick={() => setLightboxIndex(i)}
+                          >
+                            <Image src={img} alt={`${title} ${i + 1}`} fill className="object-cover" />
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
+                    )}
+                  </>
+                ) : (
+                  <div className="h-80 sm:h-96 lg:h-[500px] border border-[var(--border)] bg-[var(--bg-secondary)]" />
                 )}
               </motion.div>
             )}

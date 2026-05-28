@@ -18,7 +18,7 @@ export function CTASection() {
       ref={ref}
       className="relative py-24 overflow-hidden"
       style={{
-        backgroundImage: 'url(https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=80)',
+        backgroundImage: 'url(/images/Bedroom.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',

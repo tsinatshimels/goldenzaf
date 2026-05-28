@@ -25,7 +25,7 @@ export function AboutClient({ team }: { team: any[] }) {
       {/* Hero */}
       <section className="relative h-72 sm:h-96 flex items-end overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&q=80"
+          src="/images/Interior.png"
           alt="About Us"
           fill
           className="object-cover"
@@ -77,7 +77,7 @@ export function AboutClient({ team }: { team: any[] }) {
             >
               <div className="relative h-96 overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80"
+                  src="/images/Living.png"
                   alt="Our Work"
                   fill
                   className="object-cover"

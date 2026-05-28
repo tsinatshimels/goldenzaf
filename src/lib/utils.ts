@@ -156,47 +156,48 @@ export const subcategoryParent: Record<string, CategoryKey> = (() => {
 export const categoryImages: Record<CategoryKey, string[]> = {
   living_room: [
     '/images/Living.png',
-    'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=800&q=80',
-    'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&q=80',
+    '/images/Interior.png',
+    '/images/Others.png',
   ],
   bedroom: [
     '/images/Bedroom.png',
-    'https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=800&q=80',
-    'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&q=80',
+    '/images/Living.png',
+    '/images/Interior.png',
   ],
   office: [
     '/images/Office.png',
-    'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=800&q=80',
-    'https://images.unsplash.com/photo-1577412647305-991150c7d163?w=800&q=80',
+    '/images/Interior.png',
+    '/images/Material.jpg',
   ],
   dining_kitchen: [
     '/images/kitchen.jpg',
-    'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80',
-    'https://images.unsplash.com/photo-1565183928294-7063f23ce0f8?w=800&q=80',
+    '/images/Material.jpg',
+    '/images/Interior.png',
   ],
   doors: [
     '/images/DOOR (1).png',
-    'https://images.unsplash.com/photo-1601760561441-16420502c7e0?w=800&q=80',
-    'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=800&q=80',
+    '/images/Interior.png',
+    '/images/Others.png',
   ],
   interior: [
     '/images/Interior.png',
-    'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80',
-    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
+    '/images/Living.png',
+    '/images/Office.png',
   ],
   wall_art: [
     '/images/Wall Art 1.png',
-    'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80',
-    'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80',
+    '/images/Bedroom.png',
+    '/images/Living.png',
   ],
   materials: [
     '/images/Material.jpg',
-    'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80',
-    'https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=800&q=80',
+    '/images/Others.png',
+    '/images/Interior.png',
   ],
   other: [
     '/images/Others.png',
-    'https://images.unsplash.com/photo-1591843644882-08d78b605c8d?w=800&q=80',
+    '/images/Material.jpg',
+    '/images/Living.png',
   ],
 }
 
