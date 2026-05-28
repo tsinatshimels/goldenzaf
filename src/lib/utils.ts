@@ -13,16 +13,33 @@ export function formatDate(dateStr: string, locale: string) {
 }
 
 export function getProjectSlug(project: { slug?: { current?: string | null } | null }) {
-  const current = project.slug?.current?.trim()
-  return current ? current : null
+  const current = project.slug?.current
+  return current && current.trim() ? current : null
+}
+
+export function normalizeProjectLookupValue(value: string) {
+  return value
+    .trim()
+    .replace(/^["']+|["']+$/g, '')
+    .replace(/\s+/g, ' ')
+}
+
+export function getProjectPathSegment(
+  project: { _id?: string | null; slug?: { current?: string | null } | null },
+) {
+  const id = project._id?.trim()
+  if (id) return id
+
+  const slug = getProjectSlug(project)
+  return slug ? slug : null
 }
 
 export function getProjectHref(
   locale: string,
-  project: { slug?: { current?: string | null } | null },
+  project: { _id?: string | null; slug?: { current?: string | null } | null },
 ) {
-  const slug = getProjectSlug(project)
-  return slug ? `/${locale}/projects/${slug}` : null
+  const segment = getProjectPathSegment(project)
+  return segment ? `/${locale}/projects/${segment}` : null
 }
 
 export type CategoryKey =
@@ -109,6 +126,7 @@ export const subcategoriesByCategory: Record<CategoryKey, SubcategoryDef[]> = {
   wall_art: [{ key: 'wall_art', en: 'Wall Art', am: 'የግድግዳ ጥበብ' }],
   materials: [
     { key: 'mdf', en: 'MDF', am: 'MDF' },
+    { key: 'local_material', en: 'Local Material', am: 'Local Material' },
     { key: 'block_board', en: 'Block Board', am: 'Block Board' },
     { key: 'australia', en: 'Australia', am: 'Australia' },
     { key: 'ply_wood', en: 'Ply Wood', am: 'Ply Wood' },

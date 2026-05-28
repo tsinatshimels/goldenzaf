@@ -1,5 +1,5 @@
 import { getProjectBySlug, getProjects } from '@/sanity/lib/client'
-import { getProjectSlug } from '@/lib/utils'
+import { getProjectPathSegment, normalizeProjectLookupValue } from '@/lib/utils'
 import { notFound } from 'next/navigation'
 import { ProjectDetailClient } from './ProjectDetailClient'
 
@@ -10,8 +10,8 @@ export async function generateStaticParams() {
   try {
     const projects = await getProjects()
     return projects
-      .map((p: any) => getProjectSlug(p))
-      .filter((slug: string | null): slug is string => Boolean(slug))
+      .map((p: any) => getProjectPathSegment(p))
+      .filter((segment: string | null): segment is string => Boolean(segment))
       .map((slug: string) => ({ slug }))
   } catch {
     return []
@@ -24,9 +24,37 @@ export default async function ProjectDetailPage({
   params: { slug: string }
 }) {
   let project: any = null
+  const normalizedSlug = normalizeProjectLookupValue(params.slug)
 
   try {
     project = await getProjectBySlug(params.slug)
+    if (!project && normalizedSlug !== params.slug) {
+      project = await getProjectBySlug(normalizedSlug)
+    }
+
+    if (!project) {
+      const projects = await getProjects()
+      const matchedProject = projects.find((candidate: any) => {
+        const candidates = [
+          candidate._id,
+          candidate.slug?.current,
+          candidate.title,
+          candidate.titleAm,
+        ]
+
+        return candidates.some((value) => {
+          if (typeof value !== 'string') return false
+          return normalizeProjectLookupValue(value) === normalizedSlug
+        })
+      })
+
+      if (matchedProject) {
+        const lookupValue = getProjectPathSegment(matchedProject) || matchedProject.title || matchedProject.titleAm
+        if (lookupValue) {
+          project = await getProjectBySlug(lookupValue)
+        }
+      }
+    }
   } catch {
     // Try demo fallback
   }

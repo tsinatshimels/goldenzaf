@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 import { getProjects } from '@/sanity/lib/client'
-import { getProjectSlug } from '@/lib/utils'
+import { getProjectPathSegment } from '@/lib/utils'
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://goldenzaf.com'
 const LOCALES = ['am', 'en']
@@ -40,11 +40,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const projectRoutes: MetadataRoute.Sitemap = LOCALES.flatMap((locale) =>
     projects.reduce<MetadataRoute.Sitemap>((acc, project) => {
-      const slug = getProjectSlug(project)
-      if (!slug) return acc
+      const segment = getProjectPathSegment(project)
+      if (!segment) return acc
 
       acc.push({
-        url: `${BASE_URL}/${locale}/projects/${slug}`,
+        url: `${BASE_URL}/${locale}/projects/${segment}`,
         lastModified: project.createdAt ? new Date(project.createdAt) : new Date(),
         changeFrequency: 'monthly',
         priority: 0.8,

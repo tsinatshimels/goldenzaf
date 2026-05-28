@@ -39,7 +39,12 @@ export const projectsBySubcategoryQuery = `*[_type == "project" && subcategory =
   coverImage, description, descriptionAm
 }`
 
-export const projectBySlugQuery = `*[_type == "project" && slug.current == $slug][0] {
+export const projectBySlugQuery = `*[_type == "project" && (
+  slug.current == $slug ||
+  _id == $slug ||
+  title == $slug ||
+  titleAm == $slug
+)][0] {
   _id, title, titleAm, slug, category, subcategory, description, descriptionAm,
   images[]{ ..., asset-> }, coverImage, videoUrl, model3dUrl, createdAt, tags
 }`

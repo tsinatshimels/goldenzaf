@@ -39,13 +39,23 @@ export function ProjectDetailClient({ project }: { project: Project }) {
     : undefined
   const projectImages = project.images ?? []
 
+  const toImageUrl = (image: any) => {
+    if (!image?.asset?._ref) return null
+
+    try {
+      return urlFor(image).width(1200).url()
+    } catch {
+      return null
+    }
+  }
+
   const galleryImages = projectImages.length > 0
-    ? projectImages.map((img: any) => urlFor(img).width(1200).url())
+    ? projectImages
+        .map((img: any) => toImageUrl(img))
+        .filter((img): img is string => Boolean(img))
     : categoryImages[projectCategory]
 
-  const coverImageUrl = project.coverImage
-    ? urlFor(project.coverImage).width(1200).url()
-    : galleryImages[0]
+  const coverImageUrl = toImageUrl(project.coverImage) || galleryImages[0] || categoryImages[projectCategory][0]
 
   const allImages = [coverImageUrl, ...galleryImages.filter((g: string) => g !== coverImageUrl)]
 

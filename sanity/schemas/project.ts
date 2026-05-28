@@ -49,6 +49,7 @@ export const SUBCATEGORIES: Record<string, { value: string; title: string }[]> =
     wall_art: [{ value: 'wall_art', title: 'Wall Art' }],
     materials: [
       { value: 'mdf', title: 'MDF' },
+      { value: 'local_material', title: 'Local Material' },
       { value: 'block_board', title: 'Block Board' },
       { value: 'australia', title: 'Australia' },
       { value: 'ply_wood', title: 'Ply Wood' },
