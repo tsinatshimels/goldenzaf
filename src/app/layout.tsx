@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import { Analytics } from '@vercel/analytics/react'
 import { Cormorant_Garamond, Jost, Noto_Serif_Ethiopic } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 
 const cormorant = Cormorant_Garamond({
