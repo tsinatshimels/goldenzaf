@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Analytics } from '@vercel/analytics/react'
 import { Cormorant_Garamond, Jost, Noto_Serif_Ethiopic } from 'next/font/google'
 import './globals.css'
 
@@ -82,6 +83,7 @@ export default function RootLayout({
         className={`${cormorant.variable} ${jost.variable} ${notoSerifEthiopic.variable}`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   )
