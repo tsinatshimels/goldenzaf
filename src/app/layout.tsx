@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Cormorant_Garamond, Jost, Noto_Serif_Ethiopic } from 'next/font/google'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 
@@ -84,6 +85,7 @@ export default function RootLayout({
       >
         {children}
         <Analytics />
+        <GoogleAnalytics gaId='G-XEMYG1Q1Q1' />
       </body>
     </html>
   )
